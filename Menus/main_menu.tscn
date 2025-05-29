@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://vou2tdk5v83y"]
+
+[ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_c4ywx"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c4ywx")
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 279.0
+offset_right = 661.0
+offset_bottom = 310.0
+text = "Start Game"
+
+[node name="DevelopmentLevel" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -157.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Development Level"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 23.0
+text = "Welcome to DOOM CLONE"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="StartGame" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="DevelopmentLevel" to="." method="_on_development_level_pressed"]
