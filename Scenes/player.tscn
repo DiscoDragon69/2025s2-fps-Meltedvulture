@@ -17,3 +17,7 @@ mesh = SubResource("CapsuleMesh_4r3jo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+fov = 90.0
+
+[node name="Bullet Spawn" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

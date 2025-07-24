@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://77ix2dc7fmfd"]
+[gd_scene load_steps=24 format=3 uid="uid://77ix2dc7fmfd"]
 
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_7ir5h"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="2_iiybt"]
@@ -39,10 +39,10 @@ data = PackedVector3Array(-3, 0.25, 4, 3, 0.25, 4, -3, -0.25, 4, 3, 0.25, 4, 3, 
 
 [sub_resource type="PrismMesh" id="PrismMesh_nvyjj"]
 left_to_right = 1.0
-size = Vector3(4, 1.1, 2)
+size = Vector3(4, 1.5, 2)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_em2og"]
-data = PackedVector3Array(2, 0.55, 0.5, 2, -0.55, 0.5, -2, -0.55, 0.5, 2, 0.55, -0.5, -2, -0.55, -0.5, 2, -0.55, -0.5, 2, 0.55, 0.5, 2, 0.55, -0.5, 2, -0.55, 0.5, 2, 0.55, -0.5, 2, -0.55, -0.5, 2, -0.55, 0.5, 2, 0.55, -0.5, 2, 0.55, 0.5, -2, -0.55, -0.5, 2, 0.55, 0.5, -2, -0.55, 0.5, -2, -0.55, -0.5, -2, -0.55, 0.5, 2, -0.55, 0.5, -2, -0.55, -0.5, 2, -0.55, 0.5, 2, -0.55, -0.5, -2, -0.55, -0.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_be283"]
+data = PackedVector3Array(2, 0.75, 1, 2, -0.75, 1, -2, -0.75, 1, 2, 0.75, -1, -2, -0.75, -1, 2, -0.75, -1, 2, 0.75, 1, 2, 0.75, -1, 2, -0.75, 1, 2, 0.75, -1, 2, -0.75, -1, 2, -0.75, 1, 2, 0.75, -1, 2, 0.75, 1, -2, -0.75, -1, 2, 0.75, 1, -2, -0.75, 1, -2, -0.75, -1, -2, -0.75, 1, 2, -0.75, 1, -2, -0.75, -1, 2, -0.75, 1, 2, -0.75, -1, -2, -0.75, -1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2u46l"]
 size = Vector3(0.5, 4, 6)
@@ -55,6 +55,15 @@ size = Vector3(2, 1, 2)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cy3vx"]
 data = PackedVector3Array(0, 0.5, 1, 1, -0.5, 1, -1, -0.5, 1, 0, 0.5, -1, -1, -0.5, -1, 1, -0.5, -1, 0, 0.5, 1, 0, 0.5, -1, 1, -0.5, 1, 0, 0.5, -1, 1, -0.5, -1, 1, -0.5, 1, 0, 0.5, -1, 0, 0.5, 1, -1, -0.5, -1, 0, 0.5, 1, -1, -0.5, 1, -1, -0.5, -1, -1, -0.5, 1, 1, -0.5, 1, -1, -0.5, -1, 1, -0.5, 1, 1, -0.5, -1, -1, -0.5, -1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru0gi"]
+
+[sub_resource type="Sky" id="Sky_crip2"]
+sky_material = SubResource("ProceduralSkyMaterial_ru0gi")
+
+[sub_resource type="Environment" id="Environment_vi8wd"]
+background_mode = 2
+sky = SubResource("Sky_crip2")
 
 [node name="GreyBox" type="Node3D"]
 
@@ -106,7 +115,7 @@ mesh = SubResource("BoxMesh_1o8sm")
 shape = SubResource("ConcavePolygonShape3D_rg577")
 
 [node name="Platform" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.8, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1.3, 2.5)
 material_override = ExtResource("2_iiybt")
 mesh = SubResource("BoxMesh_t0k5q")
 
@@ -116,14 +125,14 @@ mesh = SubResource("BoxMesh_t0k5q")
 shape = SubResource("ConcavePolygonShape3D_o0ndg")
 
 [node name="Ramp" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.8, -0.5)
 material_override = ExtResource("2_iiybt")
 mesh = SubResource("PrismMesh_nvyjj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ramp"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_em2og")
+shape = SubResource("ConcavePolygonShape3D_be283")
 
 [node name="Big Wall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 0)
@@ -136,7 +145,7 @@ mesh = SubResource("BoxMesh_2u46l")
 shape = SubResource("ConcavePolygonShape3D_cnsxu")
 
 [node name="Tri Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 4)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1, 0.5, 4)
 material_override = ExtResource("2_iiybt")
 mesh = SubResource("PrismMesh_011pv")
 
@@ -147,3 +156,11 @@ shape = SubResource("ConcavePolygonShape3D_cy3vx")
 
 [node name="Player" parent="." instance=ExtResource("3_sijvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vi8wd")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.707107, -3.09086e-08, 0.707107, -0.707107, -3.09086e-08, 0.707107, 0, -1, -4.37114e-08, -3, 3, 0)
+light_energy = 3.0
+spot_attenuation = 0.0
