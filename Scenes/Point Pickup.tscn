@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5g43twq7o0jo"]
+
+[ext_resource type="Script" path="res://Scripts/PointPickup.gd" id="1_32chl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5hpgd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wilfj"]
+
+[node name="PointPickup" type="Node3D"]
+script = ExtResource("1_32chl")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_5hpgd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wilfj")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

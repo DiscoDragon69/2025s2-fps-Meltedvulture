@@ -1,19 +1,29 @@
 extends CharacterBody3D
 
 
-const speed = 5.0
-const sprintSpeed = 10
+const speed = 5
+const sprintSpeed = 8
 const acceleration = 0.1
+const deceleration = 0.1
 const jumpVelocity = 4.5
 var mouseSensitivity = 0.002
 
-var bulletScene = preload("res://Scenes/Bullet.tscn")
 @onready var bulletSpawn = $"Camera3D/Bullet Spawn"
+@onready var healthLabel = $Camera3D/UI/Health
+@onready var pointsLabel = $Camera3D/UI/Points
+
+var bulletScene = preload("res://Scenes/Bullet.tscn")
 var ammo : int = 5
 var player_health = 100
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Global.player = self
+
+func _process(delta: float) -> void:
+	healthLabel.text = "Health: " + str(Global.playerHealth)
+	pointsLabel.text = "Points: " + str(Global.playerPoints)
+	
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -36,8 +46,9 @@ func _physics_process(delta: float) -> void:
 			velocity.x = lerp(velocity.x,direction.x * speed, acceleration)
 			velocity.z = lerp(velocity.z,direction.z * speed, acceleration)
 	else:
-		velocity.x = lerp(velocity.x, 0.0, acceleration)
-		velocity.z = lerp(velocity.z, 0.0, acceleration)
+		if is_on_floor():
+			velocity.x = lerp(velocity.x, 0.0, deceleration)
+			velocity.z = lerp(velocity.z, 0.0, deceleration)
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
@@ -60,3 +71,8 @@ func shoot():
 	bullet.global_transform = bulletSpawn.global_transform
 	bullet.scale = Vector3(0.25, 0.25, 0.25)
 	ammo -= 1
+
+func take_damage(damage):
+	Global.playerHealth -= damage
+	#if Global.playerHealth <=0:
+		#queue_free()
