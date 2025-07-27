@@ -3,8 +3,11 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var attackCast = $"Attack Shape Cast"
 @onready var attackTimer = $"Attack Timer"
+
+var pointDrop = preload("res://Scenes/Point Pickup.tscn")
 var speed = 3.0
 var health = 100
+var rng = RandomNumberGenerator.new()
 
 func update_target_location (target_location):
 	nav_agent.set_target_position(target_location)
@@ -41,4 +44,10 @@ func attackCooldown():
 func take_damage(damage):
 	health -= damage
 	if health <=0:
+		for i in rng.randi_range(1, 6):
+			var droppedPoint = pointDrop.instantiate()
+			var randomForce = Vector3(rng.randf_range(-10, 10), rng.randf_range(0, 10), rng.randf_range(-10, 10))
+			get_parent().add_child(droppedPoint)
+			droppedPoint.transform = self.transform
+			droppedPoint.apply_central_impulse(randomForce)
 		queue_free()

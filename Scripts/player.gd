@@ -5,7 +5,7 @@ const speed = 5
 const sprintSpeed = 8
 const acceleration = 0.1
 const deceleration = 0.1
-const jumpVelocity = 4.5
+const jumpVelocity = 5
 var mouseSensitivity = 0.002
 
 @onready var bulletSpawn = $"Camera3D/Bullet Spawn"
@@ -63,7 +63,7 @@ func _input(event):
 		$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 		
 	if Input.is_action_just_pressed("escape"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().quit()
 
 func shoot():
 	var bullet = bulletScene.instantiate()

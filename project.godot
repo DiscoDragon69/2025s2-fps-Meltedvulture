@@ -77,6 +77,10 @@ shoot={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_2="Layer 2"
+
 [physics]
 
 3d/default_gravity=11.0
