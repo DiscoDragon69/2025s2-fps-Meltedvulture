@@ -46,8 +46,9 @@ func take_damage(damage):
 	if health <=0:
 		for i in rng.randi_range(1, 6):
 			var droppedPoint = pointDrop.instantiate()
-			var randomForce = Vector3(rng.randf_range(-10, 10), rng.randf_range(0, 10), rng.randf_range(-10, 10))
+			var randomForce = Vector3(rng.randf_range(-5, 5), rng.randf_range(0, 8), rng.randf_range(-5, 5))
 			get_parent().add_child(droppedPoint)
 			droppedPoint.transform = self.transform
 			droppedPoint.apply_central_impulse(randomForce)
+			droppedPoint.apply_torque(randomForce)
 		queue_free()

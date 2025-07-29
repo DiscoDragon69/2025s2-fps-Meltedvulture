@@ -33,6 +33,13 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jumpVelocity
+		
+	if Input.is_action_pressed("crouch"):
+		$CollisionShape3D.shape.height = 1
+		$MeshInstance3D.mesh.height = 1
+	else:
+		$CollisionShape3D.shape.height = 2
+		$MeshInstance3D.mesh.height = 2
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

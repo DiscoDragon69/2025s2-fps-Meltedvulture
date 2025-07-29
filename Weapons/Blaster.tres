@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=2 format=3 uid="uid://sc0678yoejno"]
+
+[ext_resource type="Script" path="res://Weapons/Weapons.gd" id="1_pdj5b"]
+
+[resource]
+script = ExtResource("1_pdj5b")
+name = &"Blaster"
+Damage = 20
+clip = 10
+maxClip = 10
+reserve = 40
+maxReserve = 80
+rpm = 800
+Accuracy = 5.0
+melee = false
+shotgun = false
+reloadMode = "Magazine"
+fireMode = "Semi"
+bulletPhysics = "Projectile"
+bulletScene = "res://Scenes/Bullet.tscn"
+position = Vector3(0.25, -0.4, -0.5)
+rotation = Vector3(0, 90, 0)
+scale = Vector3(1, 1, 1)
+sway_min = Vector2(-30, -20)
+sway_max = Vector2(30, 20)
+swaySpeedPosition = 0.06
+swaySpeedRotation = 0.1
+swayAmountPosition = 0.2
+swayAmountRotation = 30.0
+idleSwayAdjustment = 1.0
+idleSwayRotationStrength = 300.0
+randomSwayAmount = 2.0
+shadow = false
+metadata/_custom_type_script = "uid://c0afljd65dkhp"

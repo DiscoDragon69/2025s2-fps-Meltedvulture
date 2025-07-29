@@ -4,13 +4,16 @@ extends Node
 var player
 var playerHealth = 100
 var playerPoints = 0
+var debug
+var weaponManager
+var reserveLabel : Label
+var clipLabel : Label
+var pointsLabel : Label
 
-
-
-
-
-
-
+func updateLabels(clipAmmo, reserveAmmo):
+	clipLabel.text = str(clipAmmo)
+	reserveLabel.text = str(reserveAmmo)
+	pointsLabel.text = str(playerPoints)
 
 # if status is true, increases the size of the window and scales on-screen elements to window size
 # allows for better viewing on retina (or similar resolution) displays
