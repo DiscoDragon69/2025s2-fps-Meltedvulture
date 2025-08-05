@@ -78,6 +78,7 @@ func _ready() -> void:
 	Global.reserveLabel = %Reserve
 	Global.clipLabel = %Clip
 	Global.pointsLabel = %Points
+	Global.healthLabel = %Health
 	Global.weaponManager = self
 	#weaponInventory.resize(1)
 	addWeapon("res://Weapons/Blaster.tres")

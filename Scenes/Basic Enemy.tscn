@@ -32,3 +32,9 @@ target_position = Vector3(0, 0, -0.75)
 
 [node name="Attack Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Vision Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Vision Timer" to="." method="_on_vision_timer_timeout"]

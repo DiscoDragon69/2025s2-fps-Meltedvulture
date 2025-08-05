@@ -38,6 +38,8 @@ func update(delta):
 	if PLAYER.velocity.y < -2.0 and !PLAYER.is_on_floor():
 		transition.emit("FallingPlayerState")
 
+	if Input.is_action_just_pressed("shoot"):
+		weapon.shoot()
 func setAnimationSpeed(spd):
 	var alpha = remap(spd, 0.0, speed, 0.0, 1.0)
 	animation.speed_scale = lerp(0.0, topAnimSpeed, alpha)

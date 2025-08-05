@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=33 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
@@ -83,12 +83,75 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(6.5, 1, 1)]
+"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uke7a"]
 _data = {
 "RESET": SubResource("Animation_0cng4")
+}
+
+[sub_resource type="Animation" id="Animation_etcaa"]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.7), Vector3(0.25, -0.425, -0.7), Vector3(0.25, -0.425, -0.675), Vector3(0.25, -0.4, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(-1.0472, 1.5708, -1.309), Vector3(-1.0472, 1.5708, -1.309), Vector3(-0.97982, 1.26501, -1.04877), Vector3(-1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/WeaponMagazine:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Weapon/WeaponMagazine:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Weapon/WeaponMagazine:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3, 0.5, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(6.5, 1, 1), Vector3(6.5, 1, 1), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_qii7x"]
@@ -118,8 +181,9 @@ tracks/1/keys = {
 "values": [Vector3(-1.5708, 0, 0), Vector3(-1.39626, 0, 0), Vector3(-1.5708, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_etcaa"]
-length = 3.0
+[sub_resource type="Animation" id="Animation_juqnj"]
+resource_name = "fullReload"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -184,6 +248,7 @@ tracks/4/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_itu82"]
 _data = {
 "emptyReload": SubResource("Animation_etcaa"),
+"fullReload": SubResource("Animation_juqnj"),
 "shoot": SubResource("Animation_qii7x")
 }
 
@@ -615,11 +680,11 @@ fov = 90.0
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" node_paths=PackedStringArray("weaponAnimationPlayer") instance=ExtResource("3_eikvl")]
-transform = Transform3D(8, 0, 0, 0, -3.49691e-07, 8, 0, -8, -3.49691e-07, 0.25, -0.4, -0.5)
+transform = Transform3D(8, 0, 0, 0, -2.89599e-05, 8, 0, -8, -2.89599e-05, 0.25, -0.4, -0.5)
 weaponAnimationPlayer = NodePath("../weaponAnimations")
 
-[node name="WeaponMagazine" parent="CameraController/Camera3D/WeaponRig/Weapon" index="1"]
-transform = Transform3D(6.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="WeaponShadow" parent="CameraController/Camera3D/WeaponRig/Weapon" index="3"]
+visible = true
 
 [node name="weaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponRig"]
 libraries = {
@@ -758,7 +823,24 @@ grow_vertical = 0
 [node name="Points" type="Label" parent="UserInterface/Points"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "500"
+text = "0"
+label_settings = ExtResource("8_fyafc")
+
+[node name="Health" type="HBoxContainer" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -113.0
+offset_right = 170.0
+offset_bottom = -25.0
+grow_vertical = 0
+
+[node name="Health" type="Label" parent="UserInterface/Health"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
 label_settings = ExtResource("8_fyafc")
 
 [node name="InteractionHbox" type="HBoxContainer" parent="UserInterface"]

@@ -20,9 +20,6 @@ var isCrouching : bool = false
 
 var currentRotation : float
 
-var red = Color(0.75,0.0,0.0,1.0)
-var white = Color(1.0,1.0,1.0,1.0)
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = 12
@@ -97,13 +94,10 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 func updateVelocity() -> void:
 		move_and_slide()
 		Global.debug.addProperty("Player Y Velocity", velocity.y, 1)
-
-func flashLabel():
-	var tween = create_tween()
-	tween.set_loops(3)
-	tween.tween_property(%RoundLabel.label_settings, "font_color", white, 1.0)
-	tween.tween_property(%RoundLabel.label_settings, "font_color", red, 1.0)
-
+		
+func take_damage(damage):
+	Global.playerHealth -= damage
+	Global.updateHealth()
 
 
 

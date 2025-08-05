@@ -16,7 +16,6 @@ func update_target_location (target_location):
 func _physics_process(delta):
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
-	look_at(Global.player.global_transform.origin) # Enemy will turn to face player
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -25,8 +24,7 @@ func _physics_process(delta):
 	var new_veloicty = (next_location-current_location).normalized() * speed
 
 	velocity = new_veloicty
-	
-	update_target_location(Global.player.global_transform.origin)
+
 	move_and_slide()
 
 	if attackCast.is_colliding():
@@ -52,3 +50,15 @@ func take_damage(damage):
 			droppedPoint.apply_central_impulse(randomForce)
 			droppedPoint.apply_torque(randomForce)
 		queue_free()
+
+
+func _on_vision_timer_timeout() -> void:
+	var origin = position
+	var endpoint = Global.player.global_position + Vector3(0, 1, 0)
+	var spaceState = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(origin, endpoint)
+	var result = spaceState.intersect_ray(query)
+	var hitBody = result.get("collider")
+	if hitBody == Global.player:
+		update_target_location(Global.player.global_transform.origin)
+		look_at(Global.player.global_position + Vector3(0, 1, 0)) # Enemy will turn to face player
