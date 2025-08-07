@@ -42,3 +42,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+
+
+
+
+#Fast Enemy
+#More weapons
+#Button/switch with Door
+#Enemy spawner (Destroyable)
