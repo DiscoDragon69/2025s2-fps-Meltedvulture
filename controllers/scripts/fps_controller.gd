@@ -10,6 +10,8 @@ extends CharacterBody3D
 @export var CROUCH_SHAPECAST : Node3D
 @export var weaponController : WeaponController
 
+@onready var camera = $CameraController/Camera3D
+
 var _mouse_input : bool = false
 var _rotation_input : float
 var _tilt_input : float
@@ -83,6 +85,11 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	Global.debug.addProperty("Movement Speed",speed, 2)
 	
+		
+	if speed > 6:
+		camera.fov = lerp(camera.fov, 90 + (2.5 * speed), 0.1)
+	else:
+		camera.fov = lerp(camera.fov, 90.0, 0.1)
 	
 	if direction:
 		velocity.x = lerp(velocity.x,direction.x * speed, acceleration)
@@ -94,6 +101,7 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 func updateVelocity() -> void:
 		move_and_slide()
 		Global.debug.addProperty("Player Y Velocity", velocity.y, 1)
+		Global.debug.addProperty("FOV", camera.fov, 5)
 		
 func take_damage(damage):
 	Global.playerHealth -= damage

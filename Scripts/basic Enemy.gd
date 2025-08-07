@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var attackTimer = $"Attack Timer"
 
 var pointDrop = preload("res://Scenes/Point Pickup.tscn")
-var speed = 3.0
+var speed = 5.0
 var health = 100
 var rng = RandomNumberGenerator.new()
 
@@ -54,7 +54,7 @@ func take_damage(damage):
 
 func _on_vision_timer_timeout() -> void:
 	var origin = position
-	var endpoint = Global.player.global_position + Vector3(0, 1, 0)
+	var endpoint = Global.player.global_position + Vector3(0, 0.75, 0)
 	var spaceState = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(origin, endpoint)
 	var result = spaceState.intersect_ray(query)

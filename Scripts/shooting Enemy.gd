@@ -6,7 +6,7 @@ extends CharacterBody3D
 
 var pointDrop = preload("res://Scenes/Point Pickup.tscn")
 var bulletScene = preload("res://Scenes/Enemy Bullet.tscn")
-var speed = 2.0
+var speed = 6.0
 var health = 150
 var rng = RandomNumberGenerator.new()
 var canShoot = true
