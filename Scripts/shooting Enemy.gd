@@ -8,6 +8,7 @@ var pointDrop = preload("res://Scenes/Point Pickup.tscn")
 var bulletScene = preload("res://Scenes/Enemy Bullet.tscn")
 var speed = 6.0
 var health = 150
+var shootInterval = 1
 var rng = RandomNumberGenerator.new()
 var canShoot = true
 
@@ -32,14 +33,15 @@ func _physics_process(delta):
 
 	if canShoot == true:
 		var bullet = bulletScene.instantiate()
-		get_parent().add_child(bullet)
+
 		bullet.global_transform = bulletSpawn.global_transform
 		bullet.scale = Vector3(0.25, 0.25, 0.25)
+		get_parent().add_child(bullet)
 		canShoot = false
 		attackCooldown()
 
 func attackCooldown():
-	attackTimer.start(1)
+	attackTimer.start(shootInterval)
 	await attackTimer.timeout
 	canShoot = true
 

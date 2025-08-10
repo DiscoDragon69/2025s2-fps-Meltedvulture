@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://yx11e61r8bvg"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_spawner_(destroyable).gd" id="1_htqfc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4yat"]
+albedo_color = Color(0.468328, 0, 0, 1)
+metallic_specular = 0.25
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_2yvwb"]
+material = SubResource("StandardMaterial3D_r4yat")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nebs0"]
+
+[node name="EnemySpawner(destroyable)" type="StaticBody3D"]
+script = ExtResource("1_htqfc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_2yvwb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_nebs0")
+
+[node name="Spawn Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Spawn Timer" to="." method="_on_spawn_timer_timeout"]

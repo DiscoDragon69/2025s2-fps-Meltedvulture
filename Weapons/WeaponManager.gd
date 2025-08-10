@@ -276,10 +276,10 @@ func shoot() -> void:
 				
 		if weaponBulletPhysics == "Projectile":
 			var bulletInstance = weaponBulletScene.instantiate()
-			get_tree().get_root().add_child(bulletInstance)
 			bulletInstance.global_transform = bulletSpawnPoint.global_transform
 			bulletInstance.scale = Vector3(0.25, 0.25, 0.25)
-		
+			get_tree().get_root().add_child(bulletInstance)
+			
 		clipAmmo -= 1
 		weaponAmmoInventory[currentWeaponIndex][0] = clipAmmo
 		Global.updateLabels(clipAmmo, reserveAmmo) 
