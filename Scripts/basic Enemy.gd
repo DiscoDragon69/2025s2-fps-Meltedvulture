@@ -48,7 +48,6 @@ func take_damage(damage):
 			get_parent().add_child(droppedPoint)
 			droppedPoint.transform = self.transform
 			droppedPoint.apply_central_impulse(randomForce)
-			droppedPoint.apply_torque(randomForce)
 		queue_free()
 
 

@@ -21,3 +21,6 @@ func update(delta: float) -> void:
 
 	if Input.is_action_just_pressed("shoot"):
 		weapon.shoot()
+	
+	if Input.is_action_just_pressed("sprint"):
+		transition.emit("DashingPlayerState")

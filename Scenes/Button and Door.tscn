@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://cp6ha8p1oeydp"]
+
+[ext_resource type="Script" path="res://Scripts/button For Door.gd" id="1_6o7pi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yx45v"]
+size = Vector3(0.25, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2wend"]
+size = Vector3(0.25, 2.5, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iys4u"]
+top_radius = 0.15
+bottom_radius = 0.2
+height = 0.75
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7srrd"]
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_euest"]
+height = 1.0
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_0x4cl"]
+resource_name = "Interacted"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door Origin/Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.25, 0), Vector3(0, -1.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Button Origin/Button/ButtonMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.25, 0), Vector3(0, 0.2, 0), Vector3(0, 0.25, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e3did"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door Origin/Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.25, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Button Origin/Button/ButtonMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.25, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41tdk"]
+_data = {
+"Interacted": SubResource("Animation_0x4cl"),
+"RESET": SubResource("Animation_e3did")
+}
+
+[node name="ButtonAndDoor" type="Node3D"]
+
+[node name="Door Origin" type="Node3D" parent="."]
+
+[node name="Door" type="StaticBody3D" parent="Door Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door Origin/Door"]
+mesh = SubResource("BoxMesh_yx45v")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door Origin/Door"]
+shape = SubResource("BoxShape3D_2wend")
+
+[node name="Button Origin" type="Node3D" parent="."]
+
+[node name="Button" type="StaticBody3D" parent="Button Origin" groups=["InteractableObject"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
+script = ExtResource("1_6o7pi")
+
+[node name="Base" type="MeshInstance3D" parent="Button Origin/Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+mesh = SubResource("CylinderMesh_iys4u")
+skeleton = NodePath("../../..")
+
+[node name="ButtonMesh" type="MeshInstance3D" parent="Button Origin/Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_7srrd")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button Origin/Button"]
+shape = SubResource("CylinderShape3D_euest")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_41tdk")
+}

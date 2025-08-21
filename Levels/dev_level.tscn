@@ -1,12 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://77ix2dc7fmfd"]
+[gd_scene load_steps=28 format=3 uid="uid://77ix2dc7fmfd"]
 
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_7ir5h"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="2_iiybt"]
-[ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Basic Enemy.tscn" id="4_h7qfr"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="5_jy68c"]
 [ext_resource type="PackedScene" uid="uid://b5g43twq7o0jo" path="res://Scenes/Point Pickup.tscn" id="5_lllmm"]
 [ext_resource type="PackedScene" uid="uid://c3suacnati8p5" path="res://Scenes/Shooting Enemy.tscn" id="6_sh7u0"]
-[ext_resource type="PackedScene" uid="uid://yx11e61r8bvg" path="res://Scenes/Enemy Spawner (Destroyable).tscn" id="7_whhe0"]
+[ext_resource type="PackedScene" uid="uid://cp6ha8p1oeydp" path="res://Scenes/Button and Door.tscn" id="7_xa0fl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru0gi"]
 
@@ -199,20 +198,18 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level Nav Mesh/Tri Mesh/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_cy3vx")
 
-[node name="BasicEnemy" parent="." instance=ExtResource("4_h7qfr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8628, 1, 10.5375)
-
 [node name="PointPickup" parent="." instance=ExtResource("5_lllmm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 14)
-
-[node name="BasicEnemy2" parent="." instance=ExtResource("4_h7qfr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 12)
 
 [node name="Player" parent="." instance=ExtResource("5_jy68c")]
 
 [node name="Shooting Enemy" parent="." instance=ExtResource("6_sh7u0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
 
-[node name="EnemySpawner(destroyable)" parent="." instance=ExtResource("7_whhe0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0.5, -4)
-enemyType = "res://Scenes/Basic Enemy.tscn"
+[node name="ButtonAndDoor" parent="." instance=ExtResource("7_xa0fl")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 3, -2.98023e-08, -9)
+
+[node name="Door Origin" parent="ButtonAndDoor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[editable path="ButtonAndDoor"]
