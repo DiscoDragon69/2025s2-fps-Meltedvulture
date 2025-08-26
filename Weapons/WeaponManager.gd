@@ -39,36 +39,7 @@ class_name WeaponController
 		# Shell reloads are for guns where they load individual rounds
 
 # Internal variables
-var mouseMovement : Vector2
-var randomSwayX
-var randomSwayY
-var randomSwayAmount = 0
-var time : float = 0.0
-var idleSwayAdjustment = 0
-var idleSwayRotationStrength
-var rng = RandomNumberGenerator.new()
-var weaponBobAmount : Vector2 = Vector2(0,0)
-var weaponBulletPhysics
-var weaponBulletScene
 
-
-var reserveAmmo
-var maxClipAmmo
-var clipAmmo
-
-
-var canShoot : bool = true
-var weaponName
-var weaponAccuracy
-var time_per_shot: float = 0.1  # Default time between shots (calculated dynamically)
-var cooldown_timer: float = 0.0  # Tracks the remaining cooldown time
-var maxInventorySize = 2 #Arrays start at 0, we have 2 weapon slots
-var weaponInventory = []
-var weaponAmmoInventory = []
-var currentWeaponIndex : int = 0
-var shotgun
-var fireMode
-var reloadMode
 
 @export var weaponAnimationPlayer : AnimationPlayer
 
@@ -95,26 +66,26 @@ func _input(event):
 	
 
 	if event is InputEventMouseMotion:
-		mouseMovement = event.relative
+		weaponGlobal.mouseMovement = event.relative
 
 func addWeapon(WeaponPath: String):
-	if weaponInventory.size() < maxInventorySize:
-		weaponInventory.append(WeaponPath)
+	if weaponGlobal.weaponInventory.size() < weaponGlobal.maxInventorySize:
+		weaponGlobal.weaponInventory.append(WeaponPath)
 		var weapon = load(WeaponPath)
-		weaponAmmoInventory.append([weapon.clip, weapon.reserve])
+		weaponGlobal.weaponAmmoInventory.append([weapon.clip, weapon.reserve])
 	else:
-		weaponInventory[currentWeaponIndex] = WeaponPath
+		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = WeaponPath
 		var weapon = load(WeaponPath)
-		weaponAmmoInventory[currentWeaponIndex] = [weapon.clip, weapon.reserve]
+		weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
 	loadWeapon()
 
 func switchWeapon(direction: int) -> void:
 	# Increment or decrement the current weapon index based on the direction
-	currentWeaponIndex += direction
+	weaponGlobal.currentWeaponIndex += direction
 	
 	# Use modulo (%) to loop the index within the bounds of the array
 	# Ensure it works correctly for negative indices by adding maxInventorySize before taking the modulus
-	currentWeaponIndex = wrap_index(currentWeaponIndex, weaponInventory.size())
+	weaponGlobal.currentWeaponIndex = wrap_index(weaponGlobal.currentWeaponIndex, weaponGlobal.weaponInventory.size())
 	
 	# Equip the weapon at the new index
 	loadWeapon()
@@ -132,115 +103,115 @@ func loadWeapon():
 		return
 
 	if !Engine.is_editor_hint():
-		weaponType = load(weaponInventory[currentWeaponIndex])
+		weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 
-	weaponName = weaponType.name
+	weaponGlobal.weaponName = weaponType.name
 	weaponMesh.mesh = weaponType.mesh
 	weaponMagazine.mesh = weaponType.magazine
 	weaponBolt.mesh = weaponType.bolt
 	weaponShadow.mesh = weaponType.mesh
 	
-	weaponBulletPhysics = weaponType.bulletPhysics
-	weaponBulletScene = load(weaponType.bulletScene)
+	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
+	weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
 	scale = weaponType.scale
 	weaponShadow.visible = weaponType.shadow
-	idleSwayAdjustment = weaponType.idleSwayAdjustment
-	idleSwayRotationStrength = weaponType.idleSwayRotationStrength
-	randomSwayAmount = weaponType.randomSwayAmount
+	weaponGlobal.idleSwayAdjustment = weaponType.idleSwayAdjustment
+	weaponGlobal.idleSwayRotationStrength = weaponType.idleSwayRotationStrength
+	weaponGlobal.randomSwayAmount = weaponType.randomSwayAmount
 
-	shotgun = weaponType.shotgun
-	fireMode = weaponType.fireMode
-	reloadMode = weaponType.reloadMode
+	weaponGlobal.shotgun = weaponType.shotgun
+	weaponGlobal.fireMode = weaponType.fireMode
+	weaponGlobal.reloadMode = weaponType.reloadMode
 
 	# Load ammo from weaponAmmoInventory instead of resetting to default
-	if currentWeaponIndex < weaponAmmoInventory.size():
-		var ammo_data = weaponAmmoInventory[currentWeaponIndex]
-		clipAmmo = ammo_data[0]
-		reserveAmmo = ammo_data[1]
+	if weaponGlobal.currentWeaponIndex < weaponGlobal.weaponAmmoInventory.size():
+		var ammo_data = weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex]
+		weaponGlobal.clipAmmo = ammo_data[0]
+		weaponGlobal.reserveAmmo = ammo_data[1]
 	else:
-		clipAmmo = weaponType.clip
-		reserveAmmo = weaponType.reserve
-		weaponAmmoInventory.append([clipAmmo, reserveAmmo])
+		weaponGlobal.clipAmmo = weaponType.clip
+		weaponGlobal.reserveAmmo = weaponType.reserve
+		weaponGlobal.weaponAmmoInventory.append([weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo])
 
-	maxClipAmmo = weaponType.maxClip
-	Global.clipLabel.text = str(clipAmmo)
-	Global.reserveLabel.text = str(reserveAmmo)
-	time_per_shot = 60.0 / weaponType.rpm
-	weaponAccuracy = weaponType.Accuracy
+	weaponGlobal.maxClipAmmo = weaponType.maxClip
+	Global.clipLabel.text = str(weaponGlobal.clipAmmo)
+	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
+	weaponGlobal.time_per_shot = 60.0 / weaponType.rpm
+	weaponGlobal.weaponAccuracy = weaponType.Accuracy
 
 func sway_weapon(delta, isIdle: bool) -> void:
 	if weaponType == null:
 		return
 		
 	# Clamp mouse movement
-	mouseMovement.x = clamp(mouseMovement.x, weaponType.sway_min.x, weaponType.sway_max.x)
-	mouseMovement.y = clamp(mouseMovement.y, weaponType.sway_min.y, weaponType.sway_max.y)
+	weaponGlobal.mouseMovement.x = clamp(weaponGlobal.mouseMovement.x, weaponType.sway_min.x, weaponType.sway_max.x)
+	weaponGlobal.mouseMovement.y = clamp(weaponGlobal.mouseMovement.y, weaponType.sway_min.y, weaponType.sway_max.y)
 	
 	#Idle Bob
 	if isIdle:
 		# Get sway noise
 		var swayRandom : float = getSwayNoise()
-		var swayRandomAdjusted = swayRandom * idleSwayAdjustment
+		var swayRandomAdjusted = swayRandom * weaponGlobal.idleSwayAdjustment
 
 		# Update time for sine waves
-		time += delta * (swaySpeed + swayRandom)
+		weaponGlobal.time += delta * (swaySpeed + swayRandom)
 
 		# Calculate random sway
-		randomSwayX = sin(time * 1.5 + swayRandomAdjusted)
-		randomSwayY = sin(time - swayRandomAdjusted)
+		weaponGlobal.randomSwayX = sin(weaponGlobal.time * 1.5 + swayRandomAdjusted)
+		weaponGlobal.randomSwayY = sin(weaponGlobal.time - swayRandomAdjusted)
 
 	# Lerp weapon position
-		if randomSwayAmount != 0:
-			randomSwayX /= randomSwayAmount
-			randomSwayY /= randomSwayAmount
+		if weaponGlobal.randomSwayAmount != 0:
+			weaponGlobal.randomSwayX /= weaponGlobal.randomSwayAmount
+			weaponGlobal.randomSwayY /= weaponGlobal.randomSwayAmount
 
-		position.x = lerp(position.x, weaponType.position.x - (mouseMovement.x * weaponType.swayAmountPosition + randomSwayX) * delta, weaponType.swaySpeedPosition)
-		position.y = lerp(position.y, weaponType.position.y + (mouseMovement.y * weaponType.swayAmountPosition + randomSwayY) * delta, weaponType.swaySpeedPosition)
+		position.x = lerp(position.x, weaponType.position.x - (weaponGlobal.mouseMovement.x * weaponType.swayAmountPosition + weaponGlobal.randomSwayX) * delta, weaponType.swaySpeedPosition)
+		position.y = lerp(position.y, weaponType.position.y + (weaponGlobal.mouseMovement.y * weaponType.swayAmountPosition + weaponGlobal.randomSwayY) * delta, weaponType.swaySpeedPosition)
 
 		# Lerp weapon rotation
-		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y + (mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
-		rotation_degrees.x = lerp(rotation_degrees.x, weaponType.rotation.x - (mouseMovement.y * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
+		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y + (weaponGlobal.mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
+		rotation_degrees.x = lerp(rotation_degrees.x, weaponType.rotation.x - (weaponGlobal.mouseMovement.y * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
 	
 	#Movement bob (Not idle)
 	else:
-		position.x = lerp(position.x, weaponType.position.x - (mouseMovement.x * weaponType.swayAmountPosition + weaponBobAmount.x) * delta, weaponType.swaySpeedPosition)
-		position.y = lerp(position.y, weaponType.position.y + (mouseMovement.y * weaponType.swayAmountPosition + weaponBobAmount.y) * delta, weaponType.swaySpeedPosition)
+		position.x = lerp(position.x, weaponType.position.x - (weaponGlobal.mouseMovement.x * weaponType.swayAmountPosition + weaponGlobal.weaponBobAmount.x) * delta, weaponType.swaySpeedPosition)
+		position.y = lerp(position.y, weaponType.position.y + (weaponGlobal.mouseMovement.y * weaponType.swayAmountPosition + weaponGlobal.weaponBobAmount.y) * delta, weaponType.swaySpeedPosition)
 		# Lerp weapon rotation
-		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y + (mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
-		rotation_degrees.x = lerp(rotation_degrees.x, weaponType.rotation.x - (mouseMovement.y * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
+		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y + (weaponGlobal.mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
+		rotation_degrees.x = lerp(rotation_degrees.x, weaponType.rotation.x - (weaponGlobal.mouseMovement.y * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
 
 func weaponBob(delta, bobSpeed: float, hbobAmount: float, vbobAmount) -> void:
-	time += delta
+	weaponGlobal.time += delta
 	
-	weaponBobAmount.x = sin(time * bobSpeed) * hbobAmount
-	weaponBobAmount.y = abs(cos(time * bobSpeed) * vbobAmount)
+	weaponGlobal.weaponBobAmount.x = sin(weaponGlobal.time * bobSpeed) * hbobAmount
+	weaponGlobal.weaponBobAmount.y = abs(cos(weaponGlobal.time * bobSpeed) * vbobAmount)
 	
 func getSwayNoise() -> float: 
-	var noiseLocation : float = rng.randf_range(0, 1.0)
+	var noiseLocation : float = weaponGlobal.rng.randf_range(0, 1.0)
 	return noiseLocation
 
 func shoot() -> void:
-	if clipAmmo != 0 and canShoot == true:
+	if weaponGlobal.clipAmmo != 0 and weaponGlobal.canShoot == true:
 		# Trigger the shot
-		canShoot = false  # Prevent further shooting
-		cooldown_timer = time_per_shot  # Reset the cooldown timer
+		weaponGlobal.canShoot = false  # Prevent further shooting
+		weaponGlobal.cooldown_timer = weaponGlobal.time_per_shot  # Reset the cooldown timer
 		
-		if weaponBulletPhysics == "Hitscan":
+		if weaponGlobal.weaponBulletPhysics == "Hitscan":
 			#Run Raycast function
 			var camera = Global.player.CAMERA_CONTROLLER
 			var spaceState = camera.get_world_3d().direct_space_state
 			var screenCenter = get_viewport().size / 2
 			var origin = camera.project_ray_origin(screenCenter)
 			
-			if shotgun:
+			if weaponGlobal.shotgun:
 				for i in 8:
 					var accuracyAdjustment = Vector3 (
-					rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
-					rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
-					rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
+					weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+					weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+					weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
 					)
 					
 
@@ -257,9 +228,9 @@ func shoot() -> void:
 					
 			else:
 				var accuracyAdjustment = Vector3 (
-				rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
-				rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
-				rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
 				)
 					
 
@@ -274,78 +245,79 @@ func shoot() -> void:
 				if hitBody and hitBody.has_method("take_damage"):
 					hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
 				
-		if weaponBulletPhysics == "Projectile":
-			var bulletInstance = weaponBulletScene.instantiate()
+		if weaponGlobal.weaponBulletPhysics == "Projectile":
+			var bulletInstance = weaponGlobal.weaponBulletScene.instantiate()
 			bulletInstance.global_transform = bulletSpawnPoint.global_transform
 			bulletInstance.scale = Vector3(0.25, 0.25, 0.25)
 			get_tree().get_root().add_child(bulletInstance)
 			
-		clipAmmo -= 1
-		weaponAmmoInventory[currentWeaponIndex][0] = clipAmmo
-		Global.updateLabels(clipAmmo, reserveAmmo) 
+		weaponGlobal.clipAmmo -= 1
+		weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex][0] = weaponGlobal.clipAmmo
+		Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo) 
 		weaponAnimationPlayer.stop()
 		weaponAnimationPlayer.seek(0)
-		weaponAnimationPlayer.play(weaponName + "/" + "shoot", -1, 2, false)
+		weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "shoot", -1, 2, false)
 		
 
-		if fireMode == "Bolt":
+		if weaponGlobal.fireMode == "Bolt":
 			await weaponAnimationPlayer.animation_finished
-			weaponAnimationPlayer.play(weaponName + "/" + "boltCycle", -1, 1, false)
+			weaponGlobal.weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "boltCycle", -1, 1, false)
 			
-	elif reserveAmmo > 0 and clipAmmo == 0:
+	elif weaponGlobal.reserveAmmo > 0 and weaponGlobal.clipAmmo == 0:
 		reloadWeapon()
 		return
 
 
 func reloadWeapon():
-	canShoot = false
-	cooldown_timer = 100
-	if reloadMode == "Shell":
-		var ammoNeeded = maxClipAmmo - clipAmmo
-		weaponAnimationPlayer.play(weaponName + "/" + "startReload", -1, 1, false)
+	weaponGlobal.canShoot = false
+	weaponGlobal.cooldown_timer = 100
+	if weaponGlobal.reloadMode == "Shell":
+		var ammoNeeded = weaponGlobal.maxClipAmmo - weaponGlobal.clipAmmo
+		weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "startReload", -1, 1, false)
 		await weaponAnimationPlayer.animation_finished
 		for n in ammoNeeded:
-			weaponAnimationPlayer.play(weaponName + "/" + "shellReload", -1, 1, false)
-			reserveAmmo -= 1
-			clipAmmo += 1
+			weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "shellReload", -1, 1, false)
+			weaponGlobal.reserveAmmo -= 1
+			weaponGlobal.clipAmmo += 1
 			await weaponAnimationPlayer.animation_finished
-		weaponAnimationPlayer.play(weaponName + "/" + "finishReload", -1, 1, false)
+		weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "finishReload", -1, 1, false)
 	else:
-		if clipAmmo > 0:
-			weaponAnimationPlayer.play(weaponName + "/" + "fullReload", -1, 1, false)
+		if weaponGlobal.clipAmmo > 0:
+			weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "fullReload", -1, 1, false)
 			await weaponAnimationPlayer.animation_finished
 		else:
-			weaponAnimationPlayer.play(weaponName + "/" + "emptyReload", -1, 1, false)
+			weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "emptyReload", -1, 1, false)
 			await weaponAnimationPlayer.animation_finished
-		var ammoNeeded = maxClipAmmo - clipAmmo
-		if reserveAmmo >= ammoNeeded:
-			reserveAmmo -= ammoNeeded
-			clipAmmo = maxClipAmmo
+		var ammoNeeded = weaponGlobal.maxClipAmmo - weaponGlobal.clipAmmo
+		if weaponGlobal.reserveAmmo >= ammoNeeded:
+			weaponGlobal.reserveAmmo -= ammoNeeded
+			weaponGlobal.clipAmmo = weaponGlobal.maxClipAmmo
 		else:
-			clipAmmo += reserveAmmo
-			reserveAmmo = 0
+			weaponGlobal.clipAmmo += weaponGlobal.reserveAmmo
+			weaponGlobal.reserveAmmo = 0
 
-	Global.updateLabels(clipAmmo, reserveAmmo)
-	weaponAmmoInventory[currentWeaponIndex] = [clipAmmo, reserveAmmo]
-	canShoot = true
-	cooldown_timer = 0
+	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
+	weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo]
+	weaponGlobal.canShoot = true
+	weaponGlobal.cooldown_timer = 0
 
 func _process(delta: float) -> void:
-	if cooldown_timer > 0:
-		cooldown_timer -= delta  # Decrease the cooldown timer
-	else:
-		canShoot = true  # Allow shooting once the cooldown ends
-		if fireMode == "Auto" and Input.is_action_pressed("shoot"):
-			shoot()
+	if !Engine.is_editor_hint():
+		if weaponGlobal.cooldown_timer > 0:
+			weaponGlobal.cooldown_timer -= delta  # Decrease the cooldown timer
+		else:
+			weaponGlobal.canShoot = true  # Allow shooting once the cooldown ends
+			if weaponGlobal.fireMode == "Auto" and Input.is_action_pressed("shoot"):
+				shoot()
 		
 		
 	if !Engine.is_editor_hint():
-		if Input.is_action_just_pressed("reload") and clipAmmo != maxClipAmmo:
+		if Input.is_action_just_pressed("reload") and weaponGlobal.clipAmmo != weaponGlobal.maxClipAmmo:
 			reloadWeapon()
 
 
 func removeHitMark(Instance):
-	await get_tree().create_timer(rng.randi_range(4, 12)).timeout
+	await get_tree().create_timer(weaponGlobal.rng.randi_range(4, 12)).timeout
 	Instance.queue_free()
 
 

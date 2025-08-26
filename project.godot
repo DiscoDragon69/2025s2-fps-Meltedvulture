@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Global.gd"
-WeaponGlobal="*res://Weapons/WeaponGlobal.gd"
+weaponGlobal="*res://Weapons/WeaponGlobal.gd"
 
 [display]
 
