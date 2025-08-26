@@ -444,9 +444,9 @@ tracks/1/path = NodePath("CameraController/Camera3D:fov")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(90, 0, 0, 0.166667, 0, 110, -0.166667, 0, 0.833333, 0, 90, -0.833333, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 3)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(110, -0.166667, 0, 0.833333, 0, 90, -0.833333, 0, 0, 0),
+"times": PackedFloat32Array(0.5, 3)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -467,7 +467,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(9, 0, 0, 1, 0, 0, -3.32991e-05, 0, 0, 0),
+"points": PackedFloat32Array(12, 0, 0, 1, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 3)
 }
 tracks/4/type = "method"

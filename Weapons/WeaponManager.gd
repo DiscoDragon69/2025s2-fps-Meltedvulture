@@ -228,7 +228,7 @@ func shoot() -> void:
 					
 			else:
 				var accuracyAdjustment = Vector3 (
-				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+				weaponGlobal.rng.randf_range(-weaponType.dwaacy, weaponType.Accuracy),
 				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
 				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
 				)
