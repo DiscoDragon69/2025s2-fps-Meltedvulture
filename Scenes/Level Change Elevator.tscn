@@ -183,6 +183,33 @@ shadow_mesh = SubResource("ArrayMesh_4713s")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q850b"]
 points = PackedVector3Array(0.00529976, 0.00075, 0.0125, 0.00529976, -0.00075, 0.0125, 0.00529976, 0.00075, -0.0125, -0.00372111, 0.00075, 0.0125, -0.00372111, -0.00075, 0.0125, 0.00529976, -0.00075, -0.0125, -0.00372111, 0.00075, -0.0125, -0.00372111, -0.00075, -0.0125)
 
+[sub_resource type="Animation" id="Animation_2bh1p"]
+resource_name = "Entrance Level Open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level Entrance Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Level Entrance Door 2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.25, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_60ibn"]
 resource_name = "Exit Level Open"
 tracks/0/type = "value"
@@ -261,33 +288,6 @@ tracks/3/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_2bh1p"]
-resource_name = "Entrance Level Open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Level Entrance Door:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Level Entrance Door 2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.25, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4dnox"]
 _data = {
 "Entrance Level Open": SubResource("Animation_2bh1p"),
@@ -296,7 +296,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7aac0"]
-size = Vector3(4, 4, 1)
+size = Vector3(4, 2, 0.5)
 
 [node name="FPS Elevator" type="Node3D"]
 script = ExtResource("1_x2q70")
@@ -361,3 +361,15 @@ libraries = {
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit Detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3.5)
 shape = SubResource("BoxShape3D_7aac0")
+
+[node name="Middle Detection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Middle Detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_7aac0")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Exit Detection" to="." method="_on_exit_detection_body_entered"]
+[connection signal="body_entered" from="Middle Detection" to="." method="_on_middle_detection_body_entered"]
