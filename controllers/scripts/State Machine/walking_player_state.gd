@@ -2,7 +2,7 @@ class_name WalkingPlayerState
 
 extends PlayerMovementState
 
-@export var speed: float = 5.0
+@export var speed: float = 6.0
 @export var acceleration : float = 0.1
 @export var deceleration : float = 0.25
 @export var topAnimSpeed : float = 2.2

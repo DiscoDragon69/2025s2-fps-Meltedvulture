@@ -866,6 +866,26 @@ label_settings = ExtResource("10_yvtcv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Stamina" type="HBoxContainer" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -108.0
+offset_right = 175.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Stamina Bar" type="ProgressBar" parent="UserInterface/Stamina"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("currentState")]
 script = ExtResource("6_co0pi")
 currentState = NodePath("IdlePlayerState")
@@ -875,9 +895,9 @@ script = ExtResource("7_gshig")
 
 [node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("8_jmoha")
-weaponBobSpeed = 8.0
-weaponBobH = 3.0
-weaponBobV = 3.0
+weaponBobSpeed = 10.0
+weaponBobH = 5.0
+weaponBobV = 6.0
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("9_bneyr")

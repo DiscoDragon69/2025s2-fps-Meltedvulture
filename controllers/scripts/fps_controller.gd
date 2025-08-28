@@ -25,6 +25,8 @@ var currentRotation : float
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = 12
+var stamina = 0
+@onready var staminaBar = %"Stamina Bar"
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -67,7 +69,10 @@ func _physics_process(delta):
 	# Update camera movement based on mouse movement
 	_update_camera(delta)
 	
-
+	if stamina < 101:
+		stamina += 10 * delta
+	
+	staminaBar.value = stamina
 	
 	## Add the gravity.
 	#if not is_on_floor():
@@ -86,8 +91,8 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 	Global.debug.addProperty("Movement Speed",speed, 2)
 	
 		
-	if speed > 6:
-		camera.fov = lerp(camera.fov, 90 + (2.5 * speed), 0.1)
+	if velocity.length() > 6:
+		camera.fov = lerp(camera.fov, 90 + (3 * velocity.length()), 0.1)
 	else:
 		camera.fov = lerp(camera.fov, 90.0, 0.1)
 	

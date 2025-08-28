@@ -4,7 +4,7 @@ extends PlayerMovementState
 
 @export var speed: float = 10.0
 @export var acceleration : float = 0.1
-@export var deceleration : float = 0.25
+@export var deceleration : float = 0.01
 @export var tiltAmount : float = 1
 @export_range(1, 6, 0.1) var slideAnimSpeed : float = 4.0
 
