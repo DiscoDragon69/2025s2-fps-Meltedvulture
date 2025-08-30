@@ -49,7 +49,6 @@ var weaponDrop = preload("res://Scenes/Weapon Drop.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(weaponType)
 	Global.reserveLabel = %Reserve
 	Global.clipLabel = %Clip
 	Global.pointsLabel = %Points
@@ -91,8 +90,6 @@ func addWeapon(WeaponPath: String):
 			var weapon = load(WeaponPath)
 			weaponGlobal.currentWeaponPath = WeaponPath
 			weaponGlobal.weaponAmmoInventory.append([weapon.clip, weapon.reserve])
-			
-
 		else:
 			if weaponType != load("res://Weapons/Empty Weapon.tres"):
 				dropWeapon()
@@ -124,11 +121,9 @@ func wrap_index(index: int, size: int) -> int:
 func loadWeapon():
 	if weaponType == null:
 		return
-
 	
-	if !Engine.is_editor_hint() and weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
+	if weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
 		weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-		weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 	else:
 		weaponType = load("res://Weapons/Empty Weapon.tres")
 		
@@ -139,6 +134,7 @@ func loadWeapon():
 	weaponShadow.mesh = weaponType.mesh
 	
 	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
+	weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 	
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
@@ -353,14 +349,15 @@ func removeHitMark(Instance):
 	Instance.queue_free()
 
 func dropWeapon():
-	var dropInstance = weaponDrop.instantiate()
-	dropInstance.global_transform = bulletSpawnPoint.global_transform
-	get_tree().get_root().add_child(dropInstance)
-	dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-	dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-	dropInstance.changeVel((bulletSpawnPoint.transform.basis.z.normalized() + Global.player.velocity) * 1.25)
-	weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
-	loadWeapon()
+	if weaponType != load("res://Weapons/Empty Weapon.tres"):
+		var dropInstance = weaponDrop.instantiate()
+		dropInstance.global_transform = bulletSpawnPoint.global_transform
+		get_tree().get_root().add_child(dropInstance)
+		dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
+		dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
+		dropInstance.changeVel((bulletSpawnPoint.transform.basis.z.normalized() + Global.player.velocity) * 1.25)
+		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
+		loadWeapon()
 
 #func _physics_process(delta) -> void:
 

@@ -7,7 +7,7 @@ extends RigidBody3D
 @onready var weaponShadow : MeshInstance3D = %WeaponShadow
 
 @export var objectName : String = ""
-var weaponPath
+@export_file("*.tres") var weaponPath
 
 func update():
 	pass
