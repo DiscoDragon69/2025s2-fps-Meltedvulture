@@ -43,17 +43,26 @@ class_name WeaponController
 
 @export var weaponAnimationPlayer : AnimationPlayer
 
+var weaponDrop = preload("res://Scenes/Weapon Drop.tscn")
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(weaponType)
 	Global.reserveLabel = %Reserve
 	Global.clipLabel = %Clip
 	Global.pointsLabel = %Points
 	Global.healthLabel = %Health
 	Global.weaponManager = self
 	#weaponInventory.resize(1)
-	addWeapon("res://Weapons/Blaster.tres")
-	loadWeapon()
+	if weaponGlobal.hasSpawned == false:
+		addWeapon("res://Weapons/Empty Weapon.tres")
+		addWeapon("res://Weapons/Empty Weapon.tres")
+		addWeapon("res://Weapons/Blaster.tres")
+		addWeapon("res://Weapons/Blaster.tres")
+		weaponGlobal.hasSpawned = true
+		loadWeapon()
 
 func _input(event):
 	if event.is_action_pressed("weaponDown"):
@@ -64,19 +73,34 @@ func _input(event):
 		if !weaponAnimationPlayer.is_playing():
 			switchWeapon(-1)
 	
-
+	if Input.is_action_just_pressed("dropWeapon"):
+		dropWeapon()
+	
 	if event is InputEventMouseMotion:
 		weaponGlobal.mouseMovement = event.relative
 
 func addWeapon(WeaponPath: String):
-	if weaponGlobal.weaponInventory.size() < weaponGlobal.maxInventorySize:
-		weaponGlobal.weaponInventory.append(WeaponPath)
-		var weapon = load(WeaponPath)
-		weaponGlobal.weaponAmmoInventory.append([weapon.clip, weapon.reserve])
-	else:
+	if weaponType == load("res://Weapons/Empty Weapon.tres") or null:
 		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = WeaponPath
 		var weapon = load(WeaponPath)
+		weaponGlobal.currentWeaponPath = WeaponPath
 		weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
+	else:
+		if weaponGlobal.weaponInventory.size() < weaponGlobal.maxInventorySize:
+			weaponGlobal.weaponInventory.append(WeaponPath)
+			var weapon = load(WeaponPath)
+			weaponGlobal.currentWeaponPath = WeaponPath
+			weaponGlobal.weaponAmmoInventory.append([weapon.clip, weapon.reserve])
+			
+
+		else:
+			if weaponType != load("res://Weapons/Empty Weapon.tres"):
+				dropWeapon()
+			weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = WeaponPath
+			var weapon = load(WeaponPath)
+			weaponGlobal.currentWeaponPath = WeaponPath
+			weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
+
 	loadWeapon()
 
 func switchWeapon(direction: int) -> void:
@@ -86,7 +110,6 @@ func switchWeapon(direction: int) -> void:
 	# Use modulo (%) to loop the index within the bounds of the array
 	# Ensure it works correctly for negative indices by adding maxInventorySize before taking the modulus
 	weaponGlobal.currentWeaponIndex = wrap_index(weaponGlobal.currentWeaponIndex, weaponGlobal.weaponInventory.size())
-	
 	# Equip the weapon at the new index
 	loadWeapon()
 
@@ -102,9 +125,13 @@ func loadWeapon():
 	if weaponType == null:
 		return
 
-	if !Engine.is_editor_hint():
+	
+	if !Engine.is_editor_hint() and weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
 		weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-
+		weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
+	else:
+		weaponType = load("res://Weapons/Empty Weapon.tres")
+		
 	weaponGlobal.weaponName = weaponType.name
 	weaponMesh.mesh = weaponType.mesh
 	weaponMagazine.mesh = weaponType.magazine
@@ -112,8 +139,7 @@ func loadWeapon():
 	weaponShadow.mesh = weaponType.mesh
 	
 	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
-	weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
-
+	
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
 	scale = weaponType.scale
@@ -194,7 +220,7 @@ func getSwayNoise() -> float:
 	return noiseLocation
 
 func shoot() -> void:
-	if weaponGlobal.clipAmmo != 0 and weaponGlobal.canShoot == true:
+	if weaponGlobal.clipAmmo != 0 and weaponGlobal.canShoot == true and weaponType != load("res://Weapons/Empty Weapon.tres"):
 		# Trigger the shot
 		weaponGlobal.canShoot = false  # Prevent further shooting
 		weaponGlobal.cooldown_timer = weaponGlobal.time_per_shot  # Reset the cooldown timer
@@ -228,7 +254,7 @@ func shoot() -> void:
 					
 			else:
 				var accuracyAdjustment = Vector3 (
-				weaponGlobal.rng.randf_range(-weaponType.dwaacy, weaponType.Accuracy),
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
 				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
 				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
 				)
@@ -247,7 +273,13 @@ func shoot() -> void:
 				
 		if weaponGlobal.weaponBulletPhysics == "Projectile":
 			var bulletInstance = weaponGlobal.weaponBulletScene.instantiate()
+			var accuracyAdjustment = Vector3 (
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
+				weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy)
+			)
 			bulletInstance.global_transform = bulletSpawnPoint.global_transform
+			bulletInstance.rotation += accuracyAdjustment / 100
 			bulletInstance.scale = Vector3(0.25, 0.25, 0.25)
 			get_tree().get_root().add_child(bulletInstance)
 			
@@ -320,6 +352,15 @@ func removeHitMark(Instance):
 	await get_tree().create_timer(weaponGlobal.rng.randi_range(4, 12)).timeout
 	Instance.queue_free()
 
+func dropWeapon():
+	var dropInstance = weaponDrop.instantiate()
+	dropInstance.global_transform = bulletSpawnPoint.global_transform
+	get_tree().get_root().add_child(dropInstance)
+	dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
+	dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
+	dropInstance.changeVel((bulletSpawnPoint.transform.basis.z.normalized() + Global.player.velocity) * 1.25)
+	weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
+	loadWeapon()
 
 #func _physics_process(delta) -> void:
 

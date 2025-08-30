@@ -70,7 +70,7 @@ func _physics_process(delta):
 	_update_camera(delta)
 	
 	if stamina < 101:
-		stamina += 10 * delta
+		stamina += 16.5 * delta
 	
 	staminaBar.value = stamina
 	
@@ -88,11 +88,11 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	Global.debug.addProperty("Movement Speed",speed, 2)
+	Global.debug.addProperty("Movement Speed",velocity.length(), 2)
 	
 		
-	if velocity.length() > 6:
-		camera.fov = lerp(camera.fov, 90 + (3 * velocity.length()), 0.1)
+	if velocity.length() > 7:
+		camera.fov = lerp(camera.fov, 90 + (2 * velocity.length()), 0.1)
 	else:
 		camera.fov = lerp(camera.fov, 90.0, 0.1)
 	

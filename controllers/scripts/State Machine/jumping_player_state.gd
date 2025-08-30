@@ -2,11 +2,11 @@ class_name JumpingPlayerState
 
 extends PlayerMovementState
 
-@export var speed: float = 6.0
+@export var speed: float = 3.0
 @export var acceleration : float = 0.1
 @export var deceleration : float = 0.25
 @export var jumpVelocity : float = 7
-@export_range(0.0, 2.0, 0.1) var inputMultiplier : float = 0.05
+@export var inputMultiplier : float = 0.01
 
 # Called when the node enters the scene tree for the first time.
 func enter(previousState) -> void:

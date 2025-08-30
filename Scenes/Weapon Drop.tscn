@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bahq27dp3ky0r"]
+
+[ext_resource type="Script" path="res://Scripts/weapon Drop.gd" id="1_byojy"]
+[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/MX1 Blaster.res" id="2_4jmqu"]
+[ext_resource type="ArrayMesh" uid="uid://bshi3i34fre64" path="res://Weapons/Models/Magazine.res" id="3_vcge5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_andwr"]
+size = Vector3(0.75, 0.75, 0.25)
+
+[node name="WeaponDrop" type="RigidBody3D" groups=["InteractableObject"]]
+script = ExtResource("1_byojy")
+
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(-5.24537e-07, 0, 12, 0, 12, 0, -12, 0, -5.24537e-07, 0, 0, 0)
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="Weapon"]
+unique_name_in_owner = true
+mesh = ExtResource("2_4jmqu")
+
+[node name="WeaponMagazine" type="MeshInstance3D" parent="Weapon"]
+unique_name_in_owner = true
+mesh = ExtResource("3_vcge5")
+
+[node name="WeaponBolt" type="MeshInstance3D" parent="Weapon"]
+unique_name_in_owner = true
+
+[node name="WeaponShadow" type="MeshInstance3D" parent="Weapon"]
+unique_name_in_owner = true
+visible = false
+mesh = ExtResource("2_4jmqu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_andwr")

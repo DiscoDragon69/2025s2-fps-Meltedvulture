@@ -12,6 +12,8 @@ var weaponBobAmount : Vector2 = Vector2(0,0)
 var weaponBulletPhysics
 var weaponBulletScene
 
+var currentWeaponPath
+
 
 var reserveAmmo
 var maxClipAmmo
@@ -30,3 +32,5 @@ var currentWeaponIndex : int = 0
 var shotgun
 var fireMode
 var reloadMode
+
+var hasSpawned = false

@@ -695,7 +695,7 @@ libraries = {
 
 [node name="InteractionCast" type="RayCast3D" parent="CameraController/Camera3D"]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -1)
+target_position = Vector3(0, 0, -2)
 script = ExtResource("4_tg6sc")
 
 [node name="Bullet Spawn" type="Node3D" parent="CameraController/Camera3D"]
