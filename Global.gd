@@ -45,7 +45,10 @@ func _process(delta):
 
 
 
-
+#Dropped weapon carry over between levels
+#Possible new mechanic where you can drop weapons for later levels to pick up
+#Might make clutter
+#Thrown Weapons can deal damage at fast speeds
 
 
 #Fast Enemy

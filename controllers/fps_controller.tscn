@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=35 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
 [ext_resource type="PackedScene" uid="uid://csj7vcqrenjsi" path="res://Weapons/Weapon.tscn" id="3_eikvl"]
 [ext_resource type="Script" path="res://controllers/reticle.gd" id="3_xc2pf"]
+[ext_resource type="Resource" uid="uid://c4go56imggb4j" path="res://Weapons/Empty Weapon.tres" id="4_hmhrq"]
 [ext_resource type="Script" path="res://controllers/scripts/interaction_cast.gd" id="4_tg6sc"]
 [ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="4_y677r"]
 [ext_resource type="Script" path="res://controllers/scripts/debug_panel.gd" id="5_co0pi"]
@@ -682,10 +683,18 @@ fov = 90.0
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" node_paths=PackedStringArray("weaponAnimationPlayer") instance=ExtResource("3_eikvl")]
 transform = Transform3D(8, 0, 0, 0, -2.89599e-05, 8, 0, -8, -2.89599e-05, 0.25, -0.4, -0.5)
+weaponType = ExtResource("4_hmhrq")
 weaponAnimationPlayer = NodePath("../weaponAnimations")
+
+[node name="WeaponMesh" parent="CameraController/Camera3D/WeaponRig/Weapon" index="0"]
+mesh = null
+
+[node name="WeaponMagazine" parent="CameraController/Camera3D/WeaponRig/Weapon" index="1"]
+mesh = null
 
 [node name="WeaponShadow" parent="CameraController/Camera3D/WeaponRig/Weapon" index="3"]
 visible = true
+mesh = null
 
 [node name="weaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponRig"]
 libraries = {

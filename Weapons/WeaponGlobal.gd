@@ -26,8 +26,8 @@ var weaponAccuracy
 var time_per_shot: float = 0.1  # Default time between shots (calculated dynamically)
 var cooldown_timer: float = 0.0  # Tracks the remaining cooldown time
 var maxInventorySize = 2 #Arrays start at 0, we have 2 weapon slots
-var weaponInventory = []
-var weaponAmmoInventory = []
+var weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+var weaponAmmoInventory = [[0,0], [0,0]]
 var currentWeaponIndex : int = 0
 var shotgun
 var fireMode

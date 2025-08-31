@@ -56,13 +56,9 @@ func _ready() -> void:
 	Global.weaponManager = self
 	#weaponInventory.resize(1)
 	if weaponGlobal.hasSpawned == false:
-		addWeapon("res://Weapons/Empty Weapon.tres", true, 0, 0)
-		addWeapon("res://Weapons/Empty Weapon.tres", true, 0, 0)
-		addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
-		addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 		weaponGlobal.hasSpawned = true
 		loadWeapon()
-
+	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
 func _input(event):
 	if event.is_action_pressed("weaponDown"):
 		if !weaponAnimationPlayer.is_playing():
@@ -134,7 +130,6 @@ func loadWeapon():
 	
 	if weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
 		weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-		weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 	else:
 		weaponType = load("res://Weapons/Empty Weapon.tres")
 		
@@ -146,6 +141,8 @@ func loadWeapon():
 	
 	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
 	
+	if weaponType.bulletScene != null:
+		weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 	
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
@@ -373,7 +370,7 @@ func dropWeapon():
 		dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.parseAmmo(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
-		dropInstance.changeVel(((-bulletSpawnPoint.transform.basis.z.normalized() * 2) + Global.player.velocity) * 1.25)
+		dropInstance.changeVel(((-Global.player.transform.basis.z.normalized() * 2) + Global.player.velocity) * 1.25)
 		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
 		loadWeapon()
 		
