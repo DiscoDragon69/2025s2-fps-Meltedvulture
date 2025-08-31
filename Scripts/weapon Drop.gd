@@ -9,15 +9,28 @@ extends RigidBody3D
 @export var objectName : String = ""
 @export_file("*.tres") var weaponPath
 
+@export var defaultStats = true
+@export var clip = 0
+@export var reserve = 0
+
+#defaultStats tells the Weapon Manager to use the files default ammo
+#Turning it off will pull the ammo from the values here, which are set when the weapon is dropped.
+#Can be used to give custom ammo, such as guns with extra ammo, or no ammo for specific level.
+
 func update():
 	pass
 
 func interact():
-	Global.weaponManager.addWeapon(weaponPath)
+	Global.weaponManager.addWeapon(weaponPath, defaultStats, clip, reserve)
 	queue_free()
 
 func setWeapon(path):
 	weaponPath = path
+	defaultStats = false
+
+func parseAmmo(clipAmmo, reserveAmmo):
+	clip = clipAmmo
+	reserve = reserveAmmo
 
 func setModel(weaponType):
 	var loadedWeapon = load(weaponType)

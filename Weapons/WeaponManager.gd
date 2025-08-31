@@ -56,10 +56,10 @@ func _ready() -> void:
 	Global.weaponManager = self
 	#weaponInventory.resize(1)
 	if weaponGlobal.hasSpawned == false:
-		addWeapon("res://Weapons/Empty Weapon.tres")
-		addWeapon("res://Weapons/Empty Weapon.tres")
-		addWeapon("res://Weapons/Blaster.tres")
-		addWeapon("res://Weapons/Blaster.tres")
+		addWeapon("res://Weapons/Empty Weapon.tres", true, 0, 0)
+		addWeapon("res://Weapons/Empty Weapon.tres", true, 0, 0)
+		addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
+		addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 		weaponGlobal.hasSpawned = true
 		loadWeapon()
 
@@ -78,27 +78,37 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		weaponGlobal.mouseMovement = event.relative
 
-func addWeapon(WeaponPath: String):
+func addWeapon(WeaponPath: String, defaultStats: bool, clip: int, reserve: int):
 	if weaponType == load("res://Weapons/Empty Weapon.tres") or null:
 		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = WeaponPath
 		var weapon = load(WeaponPath)
 		weaponGlobal.currentWeaponPath = WeaponPath
-		weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
+		if defaultStats == true:
+			weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
+		else:
+			weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [clip, reserve]
 	else:
 		if weaponGlobal.weaponInventory.size() < weaponGlobal.maxInventorySize:
 			weaponGlobal.weaponInventory.append(WeaponPath)
 			var weapon = load(WeaponPath)
 			weaponGlobal.currentWeaponPath = WeaponPath
-			weaponGlobal.weaponAmmoInventory.append([weapon.clip, weapon.reserve])
+			if defaultStats == true:
+				weaponGlobal.weaponAmmoInventory.append([weapon.clip, weapon.reserve])
+			else:
+				weaponGlobal.weaponAmmoInventory.append([clip, reserve])
 		else:
 			if weaponType != load("res://Weapons/Empty Weapon.tres"):
 				dropWeapon()
 			weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = WeaponPath
 			var weapon = load(WeaponPath)
 			weaponGlobal.currentWeaponPath = WeaponPath
-			weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
-
+			if defaultStats == true:
+				weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [weapon.clip, weapon.reserve]
+			else:
+				weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex] = [clip, reserve]
+	
 	loadWeapon()
+	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo) 
 
 func switchWeapon(direction: int) -> void:
 	# Increment or decrement the current weapon index based on the direction
@@ -124,6 +134,7 @@ func loadWeapon():
 	
 	if weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
 		weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
+		weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 	else:
 		weaponType = load("res://Weapons/Empty Weapon.tres")
 		
@@ -134,7 +145,7 @@ func loadWeapon():
 	weaponShadow.mesh = weaponType.mesh
 	
 	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
-	weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
+	
 	
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
@@ -153,6 +164,11 @@ func loadWeapon():
 		var ammo_data = weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex]
 		weaponGlobal.clipAmmo = ammo_data[0]
 		weaponGlobal.reserveAmmo = ammo_data[1]
+		if weaponType == load("res://Weapons/Empty Weapon.tres"):
+			ammo_data[0] = 0
+			ammo_data[1] = 0
+			weaponGlobal.clipAmmo = 0
+			weaponGlobal.reserveAmmo = 0
 	else:
 		weaponGlobal.clipAmmo = weaponType.clip
 		weaponGlobal.reserveAmmo = weaponType.reserve
@@ -163,6 +179,7 @@ func loadWeapon():
 	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
 	weaponGlobal.time_per_shot = 60.0 / weaponType.rpm
 	weaponGlobal.weaponAccuracy = weaponType.Accuracy
+	
 
 func sway_weapon(delta, isIdle: bool) -> void:
 	if weaponType == null:
@@ -355,9 +372,11 @@ func dropWeapon():
 		get_tree().get_root().add_child(dropInstance)
 		dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-		dropInstance.changeVel((bulletSpawnPoint.transform.basis.z.normalized() + Global.player.velocity) * 1.25)
+		dropInstance.parseAmmo(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
+		dropInstance.changeVel(((-bulletSpawnPoint.transform.basis.z.normalized() * 2) + Global.player.velocity) * 1.25)
 		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
 		loadWeapon()
+		
 
 #func _physics_process(delta) -> void:
 
