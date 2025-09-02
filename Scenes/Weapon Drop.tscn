@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bahq27dp3ky0r"]
 
 [ext_resource type="Script" path="res://Scripts/weapon Drop.gd" id="1_byojy"]
-[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/MX1 Blaster.res" id="2_4jmqu"]
-[ext_resource type="ArrayMesh" uid="uid://bshi3i34fre64" path="res://Weapons/Models/Magazine.res" id="3_vcge5"]
+[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/Pistol/MX1 Blaster.res" id="2_4jmqu"]
+[ext_resource type="ArrayMesh" uid="uid://ohf0bdys7dha" path="res://Weapons/Models/Pistol/Magazine.res" id="3_vcge5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_andwr"]
 size = Vector3(0.75, 0.75, 0.25)

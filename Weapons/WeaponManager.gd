@@ -127,11 +127,12 @@ func wrap_index(index: int, size: int) -> int:
 func loadWeapon():
 	if weaponType == null:
 		return
-	
-	if weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
-		weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
-	else:
-		weaponType = load("res://Weapons/Empty Weapon.tres")
+		
+	if !Engine.is_editor_hint():
+		if weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] != null:
+			weaponType = load(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
+		else:
+			weaponType = load("res://Weapons/Empty Weapon.tres")
 		
 	weaponGlobal.weaponName = weaponType.name
 	weaponMesh.mesh = weaponType.mesh
@@ -141,42 +142,55 @@ func loadWeapon():
 	
 	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
 	
-	if weaponType.bulletScene != null:
-		weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
-	
+	if !Engine.is_editor_hint():
+		if weaponType.bulletScene != null:
+			weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
+	#Gun Orientation
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
 	scale = weaponType.scale
+	#Magazine Orientation
+	weaponMagazine.position = weaponType.magazinePosition
+	weaponMagazine.rotation_degrees = weaponType.magazineRotation
+	weaponMagazine.scale = weaponType.magazineScale
+	#Bolt Orientation
+	weaponBolt.position = weaponType.boltPosition
+	weaponBolt.rotation_degrees = weaponType.boltRotation
+	weaponBolt.scale = weaponType.boltScale
 	weaponShadow.visible = weaponType.shadow
-	weaponGlobal.idleSwayAdjustment = weaponType.idleSwayAdjustment
-	weaponGlobal.idleSwayRotationStrength = weaponType.idleSwayRotationStrength
-	weaponGlobal.randomSwayAmount = weaponType.randomSwayAmount
 
-	weaponGlobal.shotgun = weaponType.shotgun
-	weaponGlobal.fireMode = weaponType.fireMode
-	weaponGlobal.reloadMode = weaponType.reloadMode
+	
+	if !Engine.is_editor_hint():
+		weaponGlobal.idleSwayAdjustment = weaponType.idleSwayAdjustment
+		weaponGlobal.idleSwayRotationStrength = weaponType.idleSwayRotationStrength
+		weaponGlobal.randomSwayAmount = weaponType.randomSwayAmount
+		weaponGlobal.shotgun = weaponType.shotgun
+		weaponGlobal.fireMode = weaponType.fireMode
+		weaponGlobal.reloadMode = weaponType.reloadMode
 
 	# Load ammo from weaponAmmoInventory instead of resetting to default
-	if weaponGlobal.currentWeaponIndex < weaponGlobal.weaponAmmoInventory.size():
-		var ammo_data = weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex]
-		weaponGlobal.clipAmmo = ammo_data[0]
-		weaponGlobal.reserveAmmo = ammo_data[1]
-		if weaponType == load("res://Weapons/Empty Weapon.tres"):
-			ammo_data[0] = 0
-			ammo_data[1] = 0
-			weaponGlobal.clipAmmo = 0
-			weaponGlobal.reserveAmmo = 0
-	else:
-		weaponGlobal.clipAmmo = weaponType.clip
-		weaponGlobal.reserveAmmo = weaponType.reserve
-		weaponGlobal.weaponAmmoInventory.append([weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo])
-
-	weaponGlobal.maxClipAmmo = weaponType.maxClip
-	Global.clipLabel.text = str(weaponGlobal.clipAmmo)
-	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
-	weaponGlobal.time_per_shot = 60.0 / weaponType.rpm
-	weaponGlobal.weaponAccuracy = weaponType.Accuracy
-	
+	if !Engine.is_editor_hint():
+		if weaponGlobal.currentWeaponIndex < weaponGlobal.weaponAmmoInventory.size():
+			var ammo_data = weaponGlobal.weaponAmmoInventory[weaponGlobal.currentWeaponIndex]
+			weaponGlobal.clipAmmo = ammo_data[0]
+			weaponGlobal.reserveAmmo = ammo_data[1]
+			if weaponType == load("res://Weapons/Empty Weapon.tres"):
+				ammo_data[0] = 0
+				ammo_data[1] = 0
+				weaponGlobal.clipAmmo = 0
+				weaponGlobal.reserveAmmo = 0
+		else:
+			weaponGlobal.clipAmmo = weaponType.clip
+			weaponGlobal.reserveAmmo = weaponType.reserve
+			weaponGlobal.weaponAmmoInventory.append([weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo])
+		
+	if !Engine.is_editor_hint():
+		weaponGlobal.maxClipAmmo = weaponType.maxClip
+		Global.clipLabel.text = str(weaponGlobal.clipAmmo)
+		Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
+		weaponGlobal.time_per_shot = 60.0 / weaponType.rpm
+		weaponGlobal.weaponAccuracy = weaponType.Accuracy
+	print("Loaded WEapon")
 
 func sway_weapon(delta, isIdle: bool) -> void:
 	if weaponType == null:

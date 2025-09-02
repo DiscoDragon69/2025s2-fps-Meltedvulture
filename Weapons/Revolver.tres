@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=5 format=3 uid="uid://d31p6jsskwcfn"]
+
+[ext_resource type="ArrayMesh" uid="uid://ca6drlyd55u36" path="res://Weapons/Models/Revolver/Battery.res" id="1_odh56"]
+[ext_resource type="ArrayMesh" uid="uid://bd7h6tcwyx7vd" path="res://Weapons/Models/Revolver/Cylinder.res" id="2_0vcny"]
+[ext_resource type="Script" path="res://Weapons/Weapons.gd" id="3_r1os2"]
+[ext_resource type="ArrayMesh" uid="uid://bri6y2g7u3d2h" path="res://Weapons/Models/Revolver/Revolver.res" id="3_rnhah"]
+
+[resource]
+script = ExtResource("3_r1os2")
+name = &"Revolver"
+Damage = 50
+clip = 6
+maxClip = 6
+reserve = 60
+maxReserve = 60
+rpm = 200
+Accuracy = 1.0
+melee = false
+shotgun = false
+reloadMode = "Magazine"
+fireMode = "Semi"
+bulletPhysics = "Hitscan"
+bulletScene = "res://Scenes/Bullet.tscn"
+position = Vector3(0.25, -0.4, -0.5)
+rotation = Vector3(-90, 0, 0)
+scale = Vector3(12, 12, 12)
+magazinePosition = Vector3(0, 0.015, 0.01)
+magazineRotation = Vector3(0, 0, 0)
+magazineScale = Vector3(1, 1, 1)
+boltPosition = Vector3(0, 0, 0)
+boltRotation = Vector3(0, 0, 0)
+boltScale = Vector3(1, 1, 1)
+sway_min = Vector2(-90, -30)
+sway_max = Vector2(90, 30)
+swaySpeedPosition = 0.06
+swaySpeedRotation = 0.1
+swayAmountPosition = 0.2
+swayAmountRotation = 30.0
+idleSwayAdjustment = 1.0
+idleSwayRotationStrength = 300.0
+randomSwayAmount = 2.0
+mesh = ExtResource("3_rnhah")
+magazine = ExtResource("2_0vcny")
+bolt = ExtResource("1_odh56")
+shadow = false
+metadata/_custom_type_script = "uid://c0afljd65dkhp"

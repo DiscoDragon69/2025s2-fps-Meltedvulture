@@ -1,3 +1,5 @@
+@tool
+
 extends Node
 
 var mouseMovement : Vector2

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Weapons" load_steps=4 format=3 uid="uid://sc0678yoejno"]
 
-[ext_resource type="ArrayMesh" uid="uid://bshi3i34fre64" path="res://Weapons/Models/Magazine.res" id="1_1fx2t"]
+[ext_resource type="ArrayMesh" uid="uid://bshi3i34fre64" path="res://Weapons/Models/Pistol/Magazine.res" id="1_1fx2t"]
 [ext_resource type="Script" path="res://Weapons/Weapons.gd" id="1_pdj5b"]
-[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/MX1 Blaster.res" id="2_86pct"]
+[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/Pistol/MX1 Blaster.res" id="2_86pct"]
 
 [resource]
 script = ExtResource("1_pdj5b")

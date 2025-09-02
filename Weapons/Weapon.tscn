@@ -1,23 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://csj7vcqrenjsi"]
 
 [ext_resource type="Script" path="res://Weapons/WeaponManager.gd" id="1_tj3qj"]
-[ext_resource type="Resource" uid="uid://sc0678yoejno" path="res://Weapons/Blaster.tres" id="2_6kuu8"]
-[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/MX1 Blaster.res" id="3_2kqv3"]
-[ext_resource type="ArrayMesh" uid="uid://bshi3i34fre64" path="res://Weapons/Models/Magazine.res" id="4_uvibg"]
+[ext_resource type="Resource" uid="uid://sc0678yoejno" path="res://Weapons/Blaster.tres" id="2_walpv"]
+[ext_resource type="ArrayMesh" uid="uid://0tohxaimc3a8" path="res://Weapons/Models/Pistol/MX1 Blaster.res" id="3_5q7d7"]
+[ext_resource type="ArrayMesh" uid="uid://ohf0bdys7dha" path="res://Weapons/Models/Pistol/Magazine.res" id="4_lubmj"]
 
 [node name="Weapon" type="Node3D"]
-transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 0.25, -0.4, -0.5)
+transform = Transform3D(12, 0, 0, 0, -5.24537e-07, 12, 0, -12, -5.24537e-07, 0.25, -0.4, -0.5)
 script = ExtResource("1_tj3qj")
-weaponType = ExtResource("2_6kuu8")
+weaponType = ExtResource("2_walpv")
 swaySpeed = 1.0
+reset = true
 
 [node name="WeaponMesh" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-mesh = ExtResource("3_2kqv3")
+mesh = ExtResource("3_5q7d7")
 
 [node name="WeaponMagazine" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-mesh = ExtResource("4_uvibg")
+mesh = ExtResource("4_lubmj")
 
 [node name="WeaponBolt" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -25,4 +26,4 @@ unique_name_in_owner = true
 [node name="WeaponShadow" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 visible = false
-mesh = ExtResource("3_2kqv3")
+mesh = ExtResource("3_5q7d7")

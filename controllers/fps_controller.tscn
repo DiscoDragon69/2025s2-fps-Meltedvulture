@@ -1,15 +1,18 @@
-[gd_scene load_steps=35 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=39 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
 [ext_resource type="PackedScene" uid="uid://csj7vcqrenjsi" path="res://Weapons/Weapon.tscn" id="3_eikvl"]
 [ext_resource type="Script" path="res://controllers/reticle.gd" id="3_xc2pf"]
-[ext_resource type="Resource" uid="uid://c4go56imggb4j" path="res://Weapons/Empty Weapon.tres" id="4_hmhrq"]
+[ext_resource type="Resource" uid="uid://d31p6jsskwcfn" path="res://Weapons/Revolver.tres" id="4_dg3d3"]
 [ext_resource type="Script" path="res://controllers/scripts/interaction_cast.gd" id="4_tg6sc"]
 [ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="4_y677r"]
 [ext_resource type="Script" path="res://controllers/scripts/debug_panel.gd" id="5_co0pi"]
+[ext_resource type="ArrayMesh" uid="uid://bri6y2g7u3d2h" path="res://Weapons/Models/Revolver/Revolver.res" id="5_rixbu"]
+[ext_resource type="ArrayMesh" uid="uid://bd7h6tcwyx7vd" path="res://Weapons/Models/Revolver/Cylinder.res" id="6_5peru"]
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/stateMachine.gd" id="6_co0pi"]
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/idle_player_state.gd" id="7_gshig"]
+[ext_resource type="ArrayMesh" uid="uid://ca6drlyd55u36" path="res://Weapons/Models/Revolver/Battery.res" id="7_mpqc5"]
 [ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="8_fyafc"]
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/walking_player_state.gd" id="8_jmoha"]
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/spriting_player_state.gd" id="9_bneyr"]
@@ -19,6 +22,7 @@
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/jumping_player_state.gd" id="12_uovkr"]
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/falling_player_state.gd" id="13_l8yvu"]
 [ext_resource type="Script" path="res://controllers/scripts/State Machine/dashing_player_state.gd" id="18_2lhxf"]
+[ext_resource type="Script" path="res://controllers/scripts/State Machine/slamming_player_state.gd" id="20_ijaog"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6tj1"]
 
@@ -682,19 +686,22 @@ fov = 90.0
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" node_paths=PackedStringArray("weaponAnimationPlayer") instance=ExtResource("3_eikvl")]
-transform = Transform3D(8, 0, 0, 0, -2.89599e-05, 8, 0, -8, -2.89599e-05, 0.25, -0.4, -0.5)
-weaponType = ExtResource("4_hmhrq")
+transform = Transform3D(12, 0, 0, 0, -4.34399e-05, 12, 0, -12, -4.34399e-05, 0.25, -0.4, -0.5)
+weaponType = ExtResource("4_dg3d3")
 weaponAnimationPlayer = NodePath("../weaponAnimations")
 
 [node name="WeaponMesh" parent="CameraController/Camera3D/WeaponRig/Weapon" index="0"]
-mesh = null
+mesh = ExtResource("5_rixbu")
 
 [node name="WeaponMagazine" parent="CameraController/Camera3D/WeaponRig/Weapon" index="1"]
-mesh = null
+mesh = ExtResource("6_5peru")
+
+[node name="WeaponBolt" parent="CameraController/Camera3D/WeaponRig/Weapon" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+mesh = ExtResource("7_mpqc5")
 
 [node name="WeaponShadow" parent="CameraController/Camera3D/WeaponRig/Weapon" index="3"]
-visible = true
-mesh = null
+mesh = ExtResource("5_rixbu")
 
 [node name="weaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponRig"]
 libraries = {
@@ -805,7 +812,7 @@ grow_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "8"
+text = "0"
 label_settings = ExtResource("8_fyafc")
 
 [node name="Label" type="Label" parent="UserInterface/Ammo"]
@@ -816,7 +823,7 @@ label_settings = ExtResource("8_fyafc")
 [node name="Reserve" type="Label" parent="UserInterface/Ammo"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "32"
+text = "0"
 label_settings = ExtResource("8_fyafc")
 
 [node name="Points" type="HBoxContainer" parent="UserInterface"]
@@ -936,6 +943,10 @@ metadata/_custom_type_script = "uid://chrx5rfmff27h"
 [node name="DashingPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("Camera")]
 script = ExtResource("18_2lhxf")
 Camera = NodePath("../../CameraController/Camera3D")
+metadata/_custom_type_script = "uid://chrx5rfmff27h"
+
+[node name="SlammingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("20_ijaog")
 metadata/_custom_type_script = "uid://chrx5rfmff27h"
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

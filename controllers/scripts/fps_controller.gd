@@ -92,7 +92,7 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 	
 		
 	if velocity.length() > 7:
-		camera.fov = lerp(camera.fov, 90 + (2 * velocity.length()), 0.1)
+		camera.fov = clamp(lerp(camera.fov, 90 + (2 * velocity.length()), 0.1), 90, 170)
 	else:
 		camera.fov = lerp(camera.fov, 90.0, 0.1)
 	

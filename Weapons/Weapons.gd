@@ -27,6 +27,16 @@ extends Resource
 @export var position : Vector3
 @export var rotation : Vector3
 @export var scale : Vector3 = Vector3(1,1,1)
+
+@export_category("Magazine Offset")
+@export var magazinePosition : Vector3
+@export var magazineRotation : Vector3
+@export var magazineScale : Vector3 = Vector3(1,1,1)
+
+@export_category("Bolt Offset")
+@export var boltPosition : Vector3
+@export var boltRotation : Vector3
+@export var boltScale : Vector3 = Vector3(1,1,1)
 @export_category("Weapon Sway")
 @export var sway_min : Vector2 = Vector2(-20.0,-20.0)
 @export var sway_max : Vector2 = Vector2(20.0,20.0)
