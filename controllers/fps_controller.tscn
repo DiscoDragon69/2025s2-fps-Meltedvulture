@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=43 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
@@ -30,66 +30,78 @@
 material = ExtResource("2_gldw4")
 
 [sub_resource type="Animation" id="Animation_0cng4"]
-length = 0.001
+length = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon:position")
+tracks/0/path = NodePath("Weapon/WeaponMagazine:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.25, -0.4, -0.5)]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/path = NodePath("Weapon:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-1.5708, 0, 0)]
+"values": [Vector3(0.25, -0.4, -0.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponMagazine:position")
+tracks/2/path = NodePath("Weapon:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(-1.5708, 2.0301e-15, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon/WeaponMagazine:rotation")
+tracks/3/path = NodePath("Weapon/WeaponMagazine:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0.015, 0.01)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Weapon/WeaponMagazine:scale")
+tracks/4/path = NodePath("Weapon/WeaponBolt:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1, 1, 1)]
+"values": [Vector3(0, 0.015, 0.01)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Weapon/WeaponBolt:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uke7a"]
@@ -225,7 +237,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_qii7x"]
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -233,7 +245,7 @@ tracks/0/path = NodePath("Weapon:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.3),
+"times": PackedFloat32Array(0, 0.0333333, 0.233333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.4), Vector3(0.25, -0.4, -0.5)]
@@ -245,7 +257,7 @@ tracks/1/path = NodePath("Weapon:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333334, 0.4),
+"times": PackedFloat32Array(0, 0.0333334, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(-1.5708, 0, 0), Vector3(-1.39626, 0, 0), Vector3(-1.5708, 0, 0)]
@@ -256,6 +268,204 @@ _data = {
 "emptyReload": SubResource("Animation_etcaa"),
 "fullReload": SubResource("Animation_juqnj"),
 "shoot": SubResource("Animation_qii7x")
+}
+
+[sub_resource type="Animation" id="Animation_yxeyi"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.3), Vector3(0.25, -0.4, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(-1.0472, 4.37117e-08, -4.37117e-08), Vector3(-1.5708, 2.0301e-15, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/WeaponMagazine:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.0472, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ig2tc"]
+resource_name = "emptyReload"
+length = 3.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.633333, 0.9, 1, 1.23333, 2, 2.8, 3, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.4, -0.5), Vector3(0.36, -0.41, -0.5), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.3, -0.6), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.49, -0.58), Vector3(0.25, -0.49, -0.58), Vector3(0.408239, -0.489537, -0.559021), Vector3(0.25, -0.4, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.633333, 0.9, 1, 1.23333, 2, 2.43333, 2.8, 3, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 2.0301e-15, 0), Vector3(-1.309, 1.5708, -1.309), Vector3(-1.0472, -1.5708, 1.309), Vector3(-1.0472, -1.5708, 1.309), Vector3(-0.848062, -0.857072, 0.451925), Vector3(-0.659058, -0.684719, 0.201848), Vector3(-0.659058, -0.684719, 0.201848), Vector3(-0.659058, -2.45687, 2.41615), Vector3(-0.659058, -2.45687, 2.41615), Vector3(-0.537497, -2.30504, 2.50489), Vector3(-0.970152, 0.347675, -0.403645), Vector3(-1.5708, 2.0301e-15, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/WeaponMagazine:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.015, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(0, 0.015, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Weapon/WeaponMagazine:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Weapon/WeaponBolt:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 0.933333, 1.23333, 2.43333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.015, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0389641, -0.0444878, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(0, 0.015, 0.01)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Weapon/WeaponBolt:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 0.933333, 1.23333, 2.43333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hu1sj"]
+resource_name = "fullReload"
+length = 3.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.633333, 0.9, 1, 1.23333, 2, 2.8, 3, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.4, -0.5), Vector3(0.36, -0.41, -0.5), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.3, -0.6), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.49, -0.58), Vector3(0.25, -0.49, -0.58), Vector3(0.408239, -0.489537, -0.559021), Vector3(0.25, -0.4, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.633333, 0.9, 1, 1.23333, 2, 2.43333, 2.8, 3, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 2.0301e-15, 0), Vector3(-1.309, 1.5708, -1.309), Vector3(-1.0472, -1.5708, 1.309), Vector3(-1.0472, -1.5708, 1.309), Vector3(-0.848062, -0.857072, 0.451925), Vector3(-0.659058, -0.684719, 0.201848), Vector3(-0.659058, -0.684719, 0.201848), Vector3(-0.659058, -2.45687, 2.41615), Vector3(-0.659058, -2.45687, 2.41615), Vector3(-0.537497, -2.30504, 2.50489), Vector3(-0.970152, 0.347675, -0.403645), Vector3(-1.5708, 2.0301e-15, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/WeaponMagazine:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.015, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(0, 0.015, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Weapon/WeaponMagazine:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Weapon/WeaponBolt:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 0.933333, 1.23333, 2.43333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.015, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0389641, -0.0444878, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(-0.0039641, 0.016134, 0.01), Vector3(0, 0.015, 0.01)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Weapon/WeaponBolt:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.333333, 0.533333, 0.933333, 1.23333, 2.43333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kqoot"]
+_data = {
+"emptyReload": SubResource("Animation_ig2tc"),
+"fullReload": SubResource("Animation_hu1sj"),
+"shoot": SubResource("Animation_yxeyi")
 }
 
 [sub_resource type="Animation" id="Animation_xc2pf"]
@@ -686,18 +896,21 @@ fov = 90.0
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" node_paths=PackedStringArray("weaponAnimationPlayer") instance=ExtResource("3_eikvl")]
-transform = Transform3D(12, 0, 0, 0, -4.34399e-05, 12, 0, -12, -4.34399e-05, 0.25, -0.4, -0.5)
+transform = Transform3D(14, -2.84214e-14, -1.24234e-21, 0, -6.11959e-07, 14, -2.84214e-14, -14, -6.11959e-07, 0.25, -0.4, -0.5)
 weaponType = ExtResource("4_dg3d3")
+reset = false
 weaponAnimationPlayer = NodePath("../weaponAnimations")
 
 [node name="WeaponMesh" parent="CameraController/Camera3D/WeaponRig/Weapon" index="0"]
+transform = Transform3D(1, 2.11758e-22, 6.31089e-30, 0, 1, 3.55271e-15, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("5_rixbu")
 
 [node name="WeaponMagazine" parent="CameraController/Camera3D/WeaponRig/Weapon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0.01)
 mesh = ExtResource("6_5peru")
 
 [node name="WeaponBolt" parent="CameraController/Camera3D/WeaponRig/Weapon" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0.01)
 mesh = ExtResource("7_mpqc5")
 
 [node name="WeaponShadow" parent="CameraController/Camera3D/WeaponRig/Weapon" index="3"]
@@ -706,7 +919,8 @@ mesh = ExtResource("5_rixbu")
 [node name="weaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponRig"]
 libraries = {
 "": SubResource("AnimationLibrary_uke7a"),
-"Blaster": SubResource("AnimationLibrary_itu82")
+"Blaster": SubResource("AnimationLibrary_itu82"),
+"Revolver": SubResource("AnimationLibrary_kqoot")
 }
 
 [node name="InteractionCast" type="RayCast3D" parent="CameraController/Camera3D"]
@@ -812,7 +1026,7 @@ grow_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "0"
+text = "<null>"
 label_settings = ExtResource("8_fyafc")
 
 [node name="Label" type="Label" parent="UserInterface/Ammo"]
@@ -823,7 +1037,7 @@ label_settings = ExtResource("8_fyafc")
 [node name="Reserve" type="Label" parent="UserInterface/Ammo"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "0"
+text = "<null>"
 label_settings = ExtResource("8_fyafc")
 
 [node name="Points" type="HBoxContainer" parent="UserInterface"]

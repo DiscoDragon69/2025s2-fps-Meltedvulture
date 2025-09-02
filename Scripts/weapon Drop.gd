@@ -16,6 +16,10 @@ extends RigidBody3D
 #defaultStats tells the Weapon Manager to use the files default ammo
 #Turning it off will pull the ammo from the values here, which are set when the weapon is dropped.
 #Can be used to give custom ammo, such as guns with extra ammo, or no ammo for specific level.
+func _ready():
+	if weaponPath != null:
+		setModel(weaponPath)
+
 
 func update():
 	pass

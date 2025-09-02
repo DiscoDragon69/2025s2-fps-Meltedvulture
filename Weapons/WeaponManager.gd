@@ -145,6 +145,7 @@ func loadWeapon():
 	if !Engine.is_editor_hint():
 		if weaponType.bulletScene != null:
 			weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
+	
 	#Gun Orientation
 	position = weaponType.position
 	rotation_degrees = weaponType.rotation
@@ -312,7 +313,7 @@ func shoot() -> void:
 		Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo) 
 		weaponAnimationPlayer.stop()
 		weaponAnimationPlayer.seek(0)
-		weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "shoot", -1, 2, false)
+		weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "shoot", -1, 1, false)
 		
 
 		if weaponGlobal.fireMode == "Bolt":
