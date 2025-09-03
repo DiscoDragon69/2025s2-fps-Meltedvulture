@@ -143,7 +143,7 @@ func loadWeapon():
 	weaponGlobal.weaponBulletPhysics = weaponType.bulletPhysics
 	
 	if !Engine.is_editor_hint():
-		if weaponType.bulletScene != null:
+		if weaponType.bulletScene != "":
 			weaponGlobal.weaponBulletScene = load(weaponType.bulletScene)
 	
 	#Gun Orientation
@@ -191,6 +191,9 @@ func loadWeapon():
 		Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
 		weaponGlobal.time_per_shot = 60.0 / weaponType.rpm
 		weaponGlobal.weaponAccuracy = weaponType.Accuracy
+		weaponGlobal.verticalRecoil = weaponType.verticalRecoil
+		weaponGlobal.horizontalRecoil = weaponType.horizontalRecoil
+		
 	print("Loaded WEapon")
 
 func sway_weapon(delta, isIdle: bool) -> void:
@@ -314,6 +317,7 @@ func shoot() -> void:
 		weaponAnimationPlayer.stop()
 		weaponAnimationPlayer.seek(0)
 		weaponAnimationPlayer.play(weaponGlobal.weaponName + "/" + "shoot", -1, 1, false)
+		Global.player.cameraOffset += Vector3(weaponGlobal.verticalRecoil, weaponGlobal.horizontalRecoil, 0)
 		
 
 		if weaponGlobal.fireMode == "Bolt":

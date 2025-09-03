@@ -21,6 +21,7 @@ var _camera_rotation : Vector3
 var isCrouching : bool = false
 
 var currentRotation : float
+var cameraOffset : Vector3
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -77,7 +78,11 @@ func _physics_process(delta):
 	## Add the gravity.
 	#if not is_on_floor():
 		#velocity.y -= gravity * delta
-
+	var trueRotation = $CameraController/Camera3D.rotation - cameraOffset
+	$CameraController/Camera3D.rotation = lerp($CameraController/Camera3D.rotation, $CameraController/Camera3D.rotation + cameraOffset, 0.1)
+	cameraOffset = lerp(cameraOffset, Vector3(0,0,0), 0.05)
+	
+	
 func updateGravity(delta) -> void:
 	velocity.y -= gravity * delta
 	

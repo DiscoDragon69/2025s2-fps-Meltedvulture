@@ -270,45 +270,6 @@ _data = {
 "shoot": SubResource("Animation_qii7x")
 }
 
-[sub_resource type="Animation" id="Animation_yxeyi"]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.4, -0.3), Vector3(0.25, -0.4, -0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(-1.5708, 0, 0), Vector3(-1.0472, 4.37117e-08, -4.37117e-08), Vector3(-1.5708, 2.0301e-15, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponMagazine:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.0472, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_ig2tc"]
 resource_name = "emptyReload"
 length = 3.6
@@ -459,6 +420,45 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.523599), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yxeyi"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.4, -0.5), Vector3(0.25, -0.262972, -0.271307), Vector3(0.25, -0.4, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(-1.0472, 4.37117e-08, -4.37117e-08), Vector3(-1.5708, 2.0301e-15, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/WeaponMagazine:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.0472, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqoot"]
@@ -896,7 +896,7 @@ fov = 90.0
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" node_paths=PackedStringArray("weaponAnimationPlayer") instance=ExtResource("3_eikvl")]
-transform = Transform3D(14, -2.84214e-14, -1.24234e-21, 0, -6.11959e-07, 14, -2.84214e-14, -14, -6.11959e-07, 0.25, -0.4, -0.5)
+transform = Transform3D(14, -2.84214e-14, -1.02885e-19, 0, -5.06799e-05, 14, -2.84214e-14, -14, -5.06799e-05, 0.25, -0.4, -0.5)
 weaponType = ExtResource("4_dg3d3")
 reset = false
 weaponAnimationPlayer = NodePath("../weaponAnimations")

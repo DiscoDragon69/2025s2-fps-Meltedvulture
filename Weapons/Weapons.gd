@@ -37,6 +37,7 @@ extends Resource
 @export var boltPosition : Vector3
 @export var boltRotation : Vector3
 @export var boltScale : Vector3 = Vector3(1,1,1)
+
 @export_category("Weapon Sway")
 @export var sway_min : Vector2 = Vector2(-20.0,-20.0)
 @export var sway_max : Vector2 = Vector2(20.0,20.0)
@@ -44,10 +45,16 @@ extends Resource
 @export_range(0,0.2,0.01) var swaySpeedRotation : float = 0.1
 @export_range(0,0.25,0.01) var swayAmountPosition : float = 0.1
 @export_range(0,50,0.1) var swayAmountRotation : float = 30
+
 @export_category("Idle Sway")
 @export var idleSwayAdjustment : float = 1.0
 @export var idleSwayRotationStrength : float = 300.0
 @export_range(0.1,10.0,0.1) var randomSwayAmount : float = 5.0
+
+@export_category("Recoil Config")
+@export var verticalRecoil : float = 3.0
+@export var horizontalRecoil : float = 0.0
+
 @export_category("Visual Settings")
 @export var mesh : Mesh
 @export var magazine : Mesh

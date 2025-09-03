@@ -35,4 +35,7 @@ var shotgun
 var fireMode
 var reloadMode
 
+var verticalRecoil
+var horizontalRecoil
+
 var hasSpawned = false
