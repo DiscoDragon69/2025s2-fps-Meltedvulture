@@ -18,6 +18,7 @@ func update(delta):
 	#Can be used for boost jumping (MOVEMENT GAME YEAHHH)
 	PLAYER.updateInput(PLAYER.velocity.length() + speed * inputMultiplier, acceleration, deceleration)
 	PLAYER.updateVelocity()
+	weapon.sway_weapon(delta, false)
 	
 	if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
 		transition.emit("FallingPlayerState")

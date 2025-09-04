@@ -17,6 +17,7 @@ func update(delta: float) -> void:
 	PLAYER.updateGravity(delta)
 	PLAYER.updateInput(speed, acceleration, deceleration)
 	PLAYER.updateVelocity()
+	weapon.sway_weapon(delta, false)
 	
 	if PLAYER.is_on_floor():
 		transition.emit("IdlePlayerState")

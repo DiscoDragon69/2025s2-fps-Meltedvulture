@@ -46,3 +46,8 @@ func setModel(weaponType):
 
 func changeVel(vel):
 	apply_impulse(vel)
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if linear_velocity.length() > 3 and body.is_in_group("Enemy"):
+		body.take_damage(100)

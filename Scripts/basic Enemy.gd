@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var attackTimer = $"Attack Timer"
 
 var pointDrop = preload("res://Scenes/Point Pickup.tscn")
-var speed = 5.0
+var speed = 6.0
 var health = 100
 var rng = RandomNumberGenerator.new()
 

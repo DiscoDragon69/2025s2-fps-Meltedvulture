@@ -222,19 +222,19 @@ func sway_weapon(delta, isIdle: bool) -> void:
 			weaponGlobal.randomSwayX /= weaponGlobal.randomSwayAmount
 			weaponGlobal.randomSwayY /= weaponGlobal.randomSwayAmount
 
-		position.x = lerp(position.x, weaponType.position.x - (weaponGlobal.mouseMovement.x * weaponType.swayAmountPosition + weaponGlobal.randomSwayX) * delta, weaponType.swaySpeedPosition)
+		position.x = lerp(position.x, weaponType.position.x + (weaponGlobal.mouseMovement.x * weaponType.swayAmountPosition + weaponGlobal.randomSwayX) * delta, weaponType.swaySpeedPosition)
 		position.y = lerp(position.y, weaponType.position.y + (weaponGlobal.mouseMovement.y * weaponType.swayAmountPosition + weaponGlobal.randomSwayY) * delta, weaponType.swaySpeedPosition)
 
 		# Lerp weapon rotation
-		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y + (weaponGlobal.mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
+		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y - (weaponGlobal.mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
 		rotation_degrees.x = lerp(rotation_degrees.x, weaponType.rotation.x - (weaponGlobal.mouseMovement.y * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
 	
 	#Movement bob (Not idle)
 	else:
-		position.x = lerp(position.x, weaponType.position.x - (weaponGlobal.mouseMovement.x * weaponType.swayAmountPosition + weaponGlobal.weaponBobAmount.x) * delta, weaponType.swaySpeedPosition)
+		position.x = lerp(position.x, weaponType.position.x + (weaponGlobal.mouseMovement.x * weaponType.swayAmountPosition + weaponGlobal.weaponBobAmount.x) * delta, weaponType.swaySpeedPosition)
 		position.y = lerp(position.y, weaponType.position.y + (weaponGlobal.mouseMovement.y * weaponType.swayAmountPosition + weaponGlobal.weaponBobAmount.y) * delta, weaponType.swaySpeedPosition)
 		# Lerp weapon rotation
-		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y + (weaponGlobal.mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
+		rotation_degrees.y = lerp(rotation_degrees.y, weaponType.rotation.y - (weaponGlobal.mouseMovement.x * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
 		rotation_degrees.x = lerp(rotation_degrees.x, weaponType.rotation.x - (weaponGlobal.mouseMovement.y * weaponType.swayAmountRotation) * delta, weaponType.swaySpeedRotation)
 
 func weaponBob(delta, bobSpeed: float, hbobAmount: float, vbobAmount) -> void:

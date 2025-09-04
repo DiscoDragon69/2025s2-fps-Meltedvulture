@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://77ix2dc7fmfd"]
+[gd_scene load_steps=31 format=3 uid="uid://77ix2dc7fmfd"]
 
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_7ir5h"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="2_iiybt"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cp6ha8p1oeydp" path="res://Scenes/Button and Door.tscn" id="7_xa0fl"]
 [ext_resource type="PackedScene" uid="uid://ddd2srvucv877" path="res://Levels/level_one.tscn" id="8_2pry7"]
 [ext_resource type="PackedScene" uid="uid://bahq27dp3ky0r" path="res://Scenes/Weapon Drop.tscn" id="8_bo3re"]
+[ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Basic Enemy.tscn" id="9_llcw1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru0gi"]
 
@@ -229,5 +230,8 @@ weaponPath = "res://Weapons/Blaster.tres"
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 1, 10)
 objectName = "Blaster"
 weaponPath = "res://Weapons/Revolver.tres"
+
+[node name="BasicEnemy" parent="." instance=ExtResource("9_llcw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 8)
 
 [editable path="ButtonAndDoor"]
