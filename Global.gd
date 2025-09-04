@@ -9,6 +9,7 @@ var playerPoints = 0:
 		playerPoints = value
 		updatePoints()
 var playerHealth = 100
+var playerCamera
 var debug
 var weaponManager
 var reserveLabel : Label

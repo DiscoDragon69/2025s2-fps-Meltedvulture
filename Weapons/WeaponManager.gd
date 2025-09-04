@@ -10,6 +10,7 @@ class_name WeaponController
 @onready var weaponBolt : MeshInstance3D = %WeaponBolt
 @onready var weaponShadow : MeshInstance3D = %WeaponShadow
 @onready var bulletSpawnPoint = %"Bullet Spawn"
+@onready var damageParticle = preload("res://Scenes/Enemy Hurt Effect.tscn")
 
 # Exported variables
 @export var weaponType : Weapons:
@@ -57,8 +58,10 @@ func _ready() -> void:
 	#weaponInventory.resize(1)
 	if weaponGlobal.hasSpawned == false:
 		weaponGlobal.hasSpawned = true
-		loadWeapon()
+	
+	loadWeapon()
 	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
+	
 func _input(event):
 	if event.is_action_pressed("weaponDown"):
 		if !weaponAnimationPlayer.is_playing():
@@ -279,6 +282,7 @@ func shoot() -> void:
 					var hitBody = result.get("collider")  # Get the object that was hit
 					if hitBody and hitBody.has_method("take_damage"):
 						hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
+						RayDamageParticle(result, hitPosition, hitNormal)
 					
 			else:
 				var accuracyAdjustment = Vector3 (
@@ -298,7 +302,8 @@ func shoot() -> void:
 				var hitBody = result.get("collider")  # Get the object that was hit
 				if hitBody and hitBody.has_method("take_damage"):
 					hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
-				
+					RayDamageParticle(result, hitPosition, hitNormal)
+
 		if weaponGlobal.weaponBulletPhysics == "Projectile":
 			var bulletInstance = weaponGlobal.weaponBulletScene.instantiate()
 			var accuracyAdjustment = Vector3 (
@@ -389,10 +394,20 @@ func dropWeapon():
 		dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.parseAmmo(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
-		dropInstance.changeVel(((-Global.player.transform.basis.z.normalized() * 2) + Global.player.velocity) * 1.25)
+		dropInstance.changeVel(-Global.playerCamera.global_transform.basis.z.normalized() * (Global.player.velocity.length() + 8))
 		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
 		loadWeapon()
 		
+
+	
+
+func RayDamageParticle(result, hitPosition, hitNormal):
+	if result:
+		var instance = damageParticle.instantiate()
+		instance.global_position = hitPosition
+		instance.look_at(instance.global_transform.origin + hitNormal, Vector3.UP)
+		instance.rotate_object_local(Vector3(1,0,0), 90)
+		get_tree().root.add_child(instance)
 
 #func _physics_process(delta) -> void:
 

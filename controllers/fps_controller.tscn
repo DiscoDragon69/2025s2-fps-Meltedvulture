@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=41 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
@@ -866,9 +866,9 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ca8e7"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wsqmy"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST", "weaponController")]
-collision_layer = 3
-collision_mask = 3
 script = ExtResource("1_pgc1p")
 MOUSE_SENSITIVITY = 0.15
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
@@ -922,6 +922,7 @@ libraries = {
 [node name="InteractionCast" type="RayCast3D" parent="CameraController/Camera3D"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -2)
+collision_mask = 3
 script = ExtResource("4_tg6sc")
 
 [node name="Bullet Spawn" type="Node3D" parent="CameraController/Camera3D"]
@@ -1158,6 +1159,17 @@ metadata/_custom_type_script = "uid://chrx5rfmff27h"
 [node name="SlammingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("20_ijaog")
 metadata/_custom_type_script = "uid://chrx5rfmff27h"
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+can_sleep = false
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_wsqmy")
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 

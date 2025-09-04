@@ -29,10 +29,14 @@ func _physics_process(delta):
 
 	if attackCast.is_colliding():
 		for i in attackCast.get_collision_count():
-			if attackCast.get_collider(i).has_method("take_damage"):
-				attackCast.get_collider(i).take_damage(10)
-				attackCast.enabled = false
-				attackCooldown()
+			if attackCast.get_collider(i) == null:
+				pass
+			else:
+				if attackCast.get_collider(i).owner.is_in_group("Enemy") == false:
+					if attackCast.get_collider(i).has_method("take_damage"):
+						attackCast.get_collider(i).take_damage(10)
+						attackCast.enabled = false
+						attackCooldown()
 
 func attackCooldown():
 	attackTimer.start(1)
@@ -58,6 +62,6 @@ func _on_vision_timer_timeout() -> void:
 	var query = PhysicsRayQueryParameters3D.create(origin, endpoint)
 	var result = spaceState.intersect_ray(query)
 	var hitBody = result.get("collider")
-	if hitBody == Global.player:
+	if hitBody.owner == Global.player:
 		update_target_location(Global.player.global_transform.origin)
 		look_at(Global.player.global_position + Vector3(0, 1, 0)) # Enemy will turn to face player

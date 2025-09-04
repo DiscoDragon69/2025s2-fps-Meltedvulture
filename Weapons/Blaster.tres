@@ -8,6 +8,7 @@
 script = ExtResource("1_pdj5b")
 name = &"Blaster"
 Damage = 20
+weight = 2
 clip = 10
 maxClip = 10
 reserve = 40

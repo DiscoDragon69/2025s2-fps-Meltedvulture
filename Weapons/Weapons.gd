@@ -5,6 +5,7 @@ extends Resource
 @export var name : StringName
 @export_category("Shooting and Ammo")
 @export var Damage = 20
+@export var weight = 1 #Changes thrown weapon damage multiplier
 @export var clip = 8
 @export var maxClip = 8
 @export var reserve = 32

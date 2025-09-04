@@ -61,6 +61,7 @@ func _update_camera(delta):
 	
 func _ready():
 	Global.player = self
+	Global.playerCamera = $CameraController/Camera3D
 	# Get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#Prevents player from activating crouch cast
