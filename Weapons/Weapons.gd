@@ -14,6 +14,7 @@ extends Resource
 ##Accuracy of 0 means perfect accuracy, higher is more inaccurate
 @export var Accuracy : float = 0
 @export var melee : bool = false
+@export var returnThrownForce : bool = false
 
 
 @export_category("Fire Modes")

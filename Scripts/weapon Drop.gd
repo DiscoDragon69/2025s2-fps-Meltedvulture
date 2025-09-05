@@ -15,6 +15,7 @@ extends RigidBody3D
 @onready var damageParticle = preload("res://Scenes/Enemy Hurt Effect.tscn")
 
 var weaponWeight = 1
+var weaponReturning = false
 
 #defaultStats tells the Weapon Manager to use the files default ammo
 #Turning it off will pull the ammo from the values here, which are set when the weapon is dropped.
@@ -47,16 +48,25 @@ func setModel(weaponType):
 	weaponBolt.mesh = loadedWeapon.bolt
 	weaponShadow.mesh = loadedWeapon.mesh
 	weaponWeight = loadedWeapon.weight
+	weaponReturning = loadedWeapon.returnThrownForce
+
+
 
 func changeVel(vel):
 	apply_impulse(vel)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	print(linear_velocity.length())
-	if linear_velocity.length() > 2 and body.is_in_group("Enemy"):
+	if linear_velocity.length() > 4 and body.is_in_group("Enemy"):
 		body.take_damage(linear_velocity.length() * (2 + weaponWeight))
 		linear_velocity = (Vector3(0, 8, 0))
+		if weaponReturning == true:
+			returnForce()
 		var instance = damageParticle.instantiate()
 		instance.get_child(0).setCount(4 + roundi(linear_velocity.length() / 2))
 		instance.global_position = position
-		get_tree().root.add_child(instance)
+		get_tree().get_root().add_child(instance)
+
+func returnForce():
+	var playerPosition = global_position.direction_to(Global.player.position)
+	linear_velocity += playerPosition * (position.distance_to(Global.player.position) / 1.5)
