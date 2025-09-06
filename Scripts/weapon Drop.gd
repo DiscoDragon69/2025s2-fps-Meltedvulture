@@ -5,6 +5,7 @@ extends RigidBody3D
 @onready var weaponMagazine : MeshInstance3D = %WeaponMagazine
 @onready var weaponBolt : MeshInstance3D = %WeaponBolt
 @onready var weaponShadow : MeshInstance3D = %WeaponShadow
+@onready var weaponParent = $Weapon
 
 @export var objectName : String = ""
 @export_file("*.tres") var weaponPath
@@ -49,14 +50,15 @@ func setModel(weaponType):
 	weaponShadow.mesh = loadedWeapon.mesh
 	weaponWeight = loadedWeapon.weight
 	weaponReturning = loadedWeapon.returnThrownForce
+	weaponParent.scale = loadedWeapon.scale
 
 
 
 func changeVel(vel):
 	apply_impulse(vel)
+	angular_velocity = transform.basis * Vector3(-vel.length(), 0, 0)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	print(linear_velocity.length())
 	if linear_velocity.length() > 4 and body.is_in_group("Enemy"):
 		body.take_damage(linear_velocity.length() * (2 + weaponWeight))
 		linear_velocity = (Vector3(0, 8, 0))

@@ -228,8 +228,13 @@ weaponPath = "res://Weapons/Blaster.tres"
 
 [node name="WeaponDrop2" parent="." instance=ExtResource("8_bo3re")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 1, 10)
-objectName = "Blaster"
+objectName = "Revolver"
 weaponPath = "res://Weapons/Revolver.tres"
+
+[node name="WeaponDrop3" parent="." instance=ExtResource("8_bo3re")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 1, 10)
+objectName = "Soul Knife"
+weaponPath = "res://Weapons/Soul Knife.tres"
 
 [node name="BasicEnemy" parent="." instance=ExtResource("9_llcw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -12)

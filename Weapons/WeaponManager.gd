@@ -399,7 +399,6 @@ func dropWeapon():
 		loadWeapon()
 		
 
-	
 
 func RayDamageParticle(result, hitPosition, hitNormal):
 	if result:
