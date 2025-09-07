@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ddd2srvucv877"]
+[gd_scene load_steps=42 format=3 uid="uid://ddd2srvucv877"]
 
 [ext_resource type="PackedScene" uid="uid://b7iw6i56ry0x1" path="res://Scenes/Level Change Elevator.tscn" id="2_eqe8g"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="3_3evsp"]
@@ -57,7 +57,7 @@ size = Vector3(1, 4.5, 16)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2ph1x"]
 points = PackedVector3Array(-0.5, -2.25, -8, 0.5, -2.25, -8, -0.5, -2.25, 8, -0.5, 2.25, -8, 0.5, 2.25, -8, 0.5, -2.25, 8, -0.5, 2.25, 8, 0.5, 2.25, 8)
 
-[sub_resource type="BoxMesh" id="BoxMesh_rvf2f"]
+[sub_resource type="BoxMesh" id="BoxMesh_17mir"]
 size = Vector3(1, 4.5, 2)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pm3eb"]
@@ -84,7 +84,25 @@ size = Vector3(6, 1, 18)
 size = Vector3(16, 1, 32)
 
 [sub_resource type="BoxMesh" id="BoxMesh_33mvr"]
-size = Vector3(8, 8, 0.5)
+size = Vector3(15, 8, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jyany"]
+points = PackedVector3Array(7.5, 4, 0.25, 7.5, 4, -0.25, -7.5, 4, 0.25, 7.5, -4, 0.25, 7.5, -4, -0.25, -7.5, 4, -0.25, -7.5, -4, 0.25, -7.5, -4, -0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvf2f"]
+size = Vector3(1, 4.5, 7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xhofx"]
+points = PackedVector3Array(-0.5, -2.25, -3.5, 0.5, -2.25, -3.5, -0.5, -2.25, 3.5, -0.5, 2.25, -3.5, 0.5, 2.25, -3.5, 0.5, -2.25, 3.5, -0.5, 2.25, 3.5, 0.5, 2.25, 3.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2fj1y"]
+size = Vector3(1, 4.5, 7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_taax6"]
+points = PackedVector3Array(-0.5, -2.25, -3.5, 0.5, -2.25, -3.5, -0.5, -2.25, 3.5, -0.5, 2.25, -3.5, 0.5, 2.25, -3.5, 0.5, -2.25, 3.5, -0.5, 2.25, 3.5, 0.5, 2.25, 3.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d31b6"]
+points = PackedVector3Array(7.5, 4, 0.25, 7.5, 4, -0.25, -7.5, 4, 0.25, 7.5, -4, 0.25, 7.5, -4, -0.25, -7.5, 4, -0.25, -7.5, -4, 0.25, -7.5, -4, -0.25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sytq8"]
 size = Vector3(8, 3, 0.5)
@@ -180,7 +198,7 @@ shape = SubResource("ConvexPolygonShape3D_2ph1x")
 [node name="Wall 3" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -3, 0, -4.5)
 material_override = ExtResource("3_3evsp")
-mesh = SubResource("BoxMesh_rvf2f")
+mesh = SubResource("BoxMesh_17mir")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Wall 3"]
@@ -225,6 +243,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, -4.75)
 material_override = ExtResource("3_3evsp")
 mesh = SubResource("BoxMesh_33mvr")
 skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Roof 3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nav Mesh/Roof 3/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_jyany")
+
+[node name="Wall 9" type="MeshInstance3D" parent="Nav Mesh"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -4.5, 0, -34.75)
+material_override = ExtResource("3_3evsp")
+mesh = SubResource("BoxMesh_rvf2f")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Wall 9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nav Mesh/Wall 9/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xhofx")
+
+[node name="Wall 10" type="MeshInstance3D" parent="Nav Mesh"]
+transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, 1.31134e-07, 4.5, 0, -34.75)
+material_override = ExtResource("3_3evsp")
+mesh = SubResource("BoxMesh_2fj1y")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Wall 10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nav Mesh/Wall 10/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_taax6")
+
+[node name="Roof 5" type="MeshInstance3D" parent="Nav Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, -34.575)
+material_override = ExtResource("3_3evsp")
+mesh = SubResource("BoxMesh_33mvr")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Roof 5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nav Mesh/Roof 5/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_d31b6")
 
 [node name="Roof 4" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 12.25)
@@ -301,4 +357,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -15.5)
 shadow_enabled = true
 omni_range = 13.0
 
+[node name="ButtonAndDoor2" parent="." instance=ExtResource("4_ckt4g")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, -2.25, -35)
+
+[node name="Button Origin" parent="ButtonAndDoor2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, 0.75, 0, -3.27835e-08)
+
 [editable path="ButtonAndDoor"]
+[editable path="ButtonAndDoor2"]

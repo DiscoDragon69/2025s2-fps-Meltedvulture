@@ -394,7 +394,10 @@ func dropWeapon():
 		dropInstance.setWeapon(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.setModel(weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex])
 		dropInstance.parseAmmo(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
-		dropInstance.changeVel(-Global.playerCamera.global_transform.basis.z.normalized() * (Global.player.velocity.length() + 8))
+		if weaponType == load("res://Weapons/Soul Knife.tres"):
+			dropInstance.changeVel(-Global.playerCamera.global_transform.basis.z.normalized() * (Global.player.velocity.length() + 16))
+		else:
+			dropInstance.changeVel(-Global.playerCamera.global_transform.basis.z.normalized() * (Global.player.velocity.length() + 8))
 		weaponGlobal.weaponInventory[weaponGlobal.currentWeaponIndex] = null
 		loadWeapon()
 		

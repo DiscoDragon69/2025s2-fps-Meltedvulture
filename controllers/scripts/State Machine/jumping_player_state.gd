@@ -5,7 +5,7 @@ extends PlayerMovementState
 @export var speed: float = 3.0
 @export var acceleration : float = 0.1
 @export var deceleration : float = 0.25
-@export var jumpVelocity : float = 7
+@export var jumpVelocity : float = 6
 @export var inputMultiplier : float = 0.01
 
 # Called when the node enters the scene tree for the first time.

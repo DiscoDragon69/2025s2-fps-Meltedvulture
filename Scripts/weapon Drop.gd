@@ -59,13 +59,15 @@ func changeVel(vel):
 	angular_velocity = transform.basis * Vector3(-vel.length(), 0, 0)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if linear_velocity.length() > 4 and body.is_in_group("Enemy"):
-		body.take_damage(linear_velocity.length() * (2 + weaponWeight))
+	var hitVelocity = linear_velocity.length()
+	if hitVelocity > 4 and body.is_in_group("Enemy"):
+		body.take_damage(roundi(hitVelocity * (2 + weaponWeight)))
+		print(roundi(hitVelocity * (2 + weaponWeight)))
 		linear_velocity = (Vector3(0, 8, 0))
 		if weaponReturning == true:
 			returnForce()
 		var instance = damageParticle.instantiate()
-		instance.get_child(0).setCount(4 + roundi(linear_velocity.length() / 2))
+		instance.get_child(0).setCount(4 + roundi(hitVelocity / 2))
 		instance.global_position = position
 		get_tree().get_root().add_child(instance)
 
