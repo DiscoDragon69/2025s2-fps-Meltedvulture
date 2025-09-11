@@ -17,6 +17,7 @@ extends RigidBody3D
 
 var weaponWeight = 1
 var weaponReturning = false
+var returning = false
 
 #defaultStats tells the Weapon Manager to use the files default ammo
 #Turning it off will pull the ammo from the values here, which are set when the weapon is dropped.
@@ -61,16 +62,17 @@ func changeVel(vel):
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	var hitVelocity = linear_velocity.length()
 	if hitVelocity > 4 and body.is_in_group("Enemy"):
-		body.take_damage(roundi(hitVelocity * (2 + weaponWeight)))
-		print(roundi(hitVelocity * (2 + weaponWeight)))
 		linear_velocity = (Vector3(0, 8, 0))
 		if weaponReturning == true:
-			returnForce()
+			returning = true
 		var instance = damageParticle.instantiate()
 		instance.get_child(0).setCount(4 + roundi(hitVelocity / 2))
 		instance.global_position = position
 		get_tree().get_root().add_child(instance)
+		body.take_damage(roundi(hitVelocity * (2 + weaponWeight)))
 
-func returnForce():
-	var playerPosition = global_position.direction_to(Global.player.position)
-	linear_velocity += playerPosition * (position.distance_to(Global.player.position) / 1.5)
+
+func _physics_process(delta: float) -> void:
+	if returning:
+		var playerPosition = global_position.direction_to(Global.player.position)
+		linear_velocity += playerPosition * (position.distance_to(Global.player.position) / 16)

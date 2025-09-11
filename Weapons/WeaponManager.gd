@@ -281,8 +281,8 @@ func shoot() -> void:
 					var hitNormal = result.get("normal")
 					var hitBody = result.get("collider")  # Get the object that was hit
 					if hitBody and hitBody.has_method("take_damage"):
-						hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
 						RayDamageParticle(result, hitPosition, hitNormal)
+						hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
 					
 			else:
 				var accuracyAdjustment = Vector3 (
@@ -301,8 +301,9 @@ func shoot() -> void:
 				var hitNormal = result.get("normal")
 				var hitBody = result.get("collider")  # Get the object that was hit
 				if hitBody and hitBody.has_method("take_damage"):
-					hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
 					RayDamageParticle(result, hitPosition, hitNormal)
+					hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
+					
 
 		if weaponGlobal.weaponBulletPhysics == "Projectile":
 			var bulletInstance = weaponGlobal.weaponBulletScene.instantiate()
@@ -409,7 +410,7 @@ func RayDamageParticle(result, hitPosition, hitNormal):
 		instance.global_position = hitPosition
 		instance.look_at(instance.global_transform.origin + hitNormal, Vector3.UP)
 		instance.rotate_object_local(Vector3(1,0,0), 90)
-		get_tree().root.add_child(instance)
+		get_tree().get_root().add_child(instance)
 
 #func _physics_process(delta) -> void:
 
