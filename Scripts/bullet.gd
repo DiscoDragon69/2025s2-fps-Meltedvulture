@@ -18,10 +18,10 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("take_damage"):
-		body.take_damage(damage)
 		var instance = damageParticle.instantiate()
 		instance.global_position = position
 		get_tree().root.add_child(instance)
+		body.take_damage(damage)
 	destroy()
 
 func destroy():
