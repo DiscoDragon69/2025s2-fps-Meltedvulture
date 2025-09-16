@@ -32,6 +32,9 @@ project/assembly_name="FPS"
 
 [editor]
 
+naming/node_name_casing=1
+naming/scene_name_casing=1
+naming/script_name_casing=1
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
@@ -129,7 +132,9 @@ dropWeapon={
 
 [physics]
 
+common/physics_jitter_fix=0.0
 3d/default_gravity=11.0
+common/physics_interpolation=true
 
 [rendering]
 

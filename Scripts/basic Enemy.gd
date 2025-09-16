@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var attackCast = $"Attack Shape Cast"
 @onready var attackTimer = $"Attack Timer"
 
-var pointDrop = preload("res://Scenes/Point Pickup.tscn")
+var Drop = preload("res://Scenes/Pickup.tscn")
 var speed = 6.0
 var health = 100
 var rng = RandomNumberGenerator.new()
@@ -47,7 +47,7 @@ func take_damage(damage):
 	health -= damage
 	if health <=0:
 		for i in rng.randi_range(1, 6):
-			var droppedPoint = pointDrop.instantiate()
+			var droppedPoint = Drop.instantiate()
 			var randomForce = Vector3(rng.randf_range(-5, 5), rng.randf_range(0, 8), rng.randf_range(-5, 5))
 			get_parent().add_child(droppedPoint)
 			droppedPoint.transform = self.transform

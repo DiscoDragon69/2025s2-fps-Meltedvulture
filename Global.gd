@@ -8,7 +8,10 @@ var playerPoints = 0:
 	set(value):
 		playerPoints = value
 		updatePoints()
-var playerHealth = 100
+var playerHealth = 100:
+	set(value):
+		healthLabel.text = str(value)
+		playerHealth = value
 var playerCamera
 var debug
 var weaponManager
@@ -25,6 +28,7 @@ func updatePoints():
 	pointsLabel.text = str(playerPoints)
 
 func updateHealth():
+	#DEPRECATED FUNCTION but still here for old code
 	healthLabel.text = str(playerHealth)
 
 # if status is true, increases the size of the window and scales on-screen elements to window size
@@ -53,6 +57,9 @@ func _process(delta):
 #Might make clutter
 #Thrown Weapons can deal damage at fast speeds
 
+#Enemy that turns to face player. Charges then dashes in the direciton, can be chaotic
+#With many dashing around trying to hit you
+#MAKE LEVEL WITH JUST THESE THIS WILL BE SO FUN OMG
 
 #Fast Enemy
 #More weapons

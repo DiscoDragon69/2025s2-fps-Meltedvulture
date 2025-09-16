@@ -264,6 +264,9 @@ func shoot() -> void:
 			var origin = camera.project_ray_origin(screenCenter)
 			
 			if weaponGlobal.shotgun:
+				#MAKE THIS MODULAR
+				#Make it so that this is a way of spawning not shooting
+				#if either projectile or raycast it will do as below instead of just raycasts
 				for i in 8:
 					var accuracyAdjustment = Vector3 (
 					weaponGlobal.rng.randf_range(-weaponType.Accuracy, weaponType.Accuracy),
@@ -412,6 +415,11 @@ func RayDamageParticle(result, hitPosition, hitNormal):
 		instance.rotate_object_local(Vector3(1,0,0), 90)
 		get_tree().get_root().add_child(instance)
 
+
+func addAmmo(clipAdd, reserveAdd):
+	#Method of adding ammo
+	pass
+	
 #func _physics_process(delta) -> void:
 
 

@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_7ir5h"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="2_iiybt"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="5_jy68c"]
-[ext_resource type="PackedScene" uid="uid://b5g43twq7o0jo" path="res://Scenes/Point Pickup.tscn" id="5_lllmm"]
+[ext_resource type="PackedScene" uid="uid://b5g43twq7o0jo" path="res://Scenes/Pickup.tscn" id="5_lllmm"]
 [ext_resource type="PackedScene" uid="uid://b7iw6i56ry0x1" path="res://Scenes/Level Change Elevator.tscn" id="7_jq1s3"]
 [ext_resource type="PackedScene" uid="uid://cp6ha8p1oeydp" path="res://Scenes/Button and Door.tscn" id="7_xa0fl"]
 [ext_resource type="PackedScene" uid="uid://ddd2srvucv877" path="res://Levels/level_one.tscn" id="8_2pry7"]
