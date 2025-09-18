@@ -55,13 +55,14 @@ func _process(delta):
 #Dropped weapon carry over between levels
 #Possible new mechanic where you can drop weapons for later levels to pick up
 #Might make clutter
-#Thrown Weapons can deal damage at fast speeds
+
+#Thrown Weapons can deal damage at fast speeds #IMPLEMENTED
 
 #Enemy that turns to face player. Charges then dashes in the direciton, can be chaotic
 #With many dashing around trying to hit you
 #MAKE LEVEL WITH JUST THESE THIS WILL BE SO FUN OMG
 
-#Fast Enemy
+#Fast Enemy #IMPLEMENTED
 #More weapons
 #Button/switch with Door
 #Enemy spawner (Destroyable)

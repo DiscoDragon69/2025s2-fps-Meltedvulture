@@ -5,26 +5,22 @@ extends CharacterBody3D
 @onready var attackTimer = $"Attack Timer"
 
 var Drop = preload("res://Scenes/Pickup.tscn")
-var speed = 6.0
+var speed = 28.0
 var health = 100
 var rng = RandomNumberGenerator.new()
+
+var new_velocity
 
 func update_target_location (target_location):
 	nav_agent.set_target_position(target_location)
 
 
 func _physics_process(delta):
-	var current_location = global_transform.origin
-	var next_location = nav_agent.get_next_path_position()
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
-	# Vector Maths
-	var new_veloicty = (next_location-current_location).normalized() * speed
-
-	velocity = new_veloicty
-
+	
+	velocity.x = move_toward(velocity.x, 0, 0.25)
+	velocity.z = move_toward(velocity.z, 0, 0.25)
 	move_and_slide()
 
 	if attackCast.is_colliding():
@@ -65,3 +61,14 @@ func _on_vision_timer_timeout() -> void:
 	if hitBody.owner == Global.player:
 		update_target_location(Global.player.global_transform.origin)
 		look_at(Global.player.global_position + Vector3(0, 1, 0)) # Enemy will turn to face player
+
+
+func _on_dash_timer_timeout() -> void:
+	var current_location = global_transform.origin
+	var next_location = nav_agent.get_next_path_position()
+
+	new_velocity = (next_location-current_location).normalized() * speed
+	new_velocity.y = (Global.player.global_position.y - global_position.y) * 2
+
+	velocity = new_velocity
+	

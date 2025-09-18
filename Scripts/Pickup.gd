@@ -41,6 +41,5 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		if type == "health":
 			Global.playerHealth += 5
 		if type == "ammo":
-			pass
-			#Global.weaponManager.ammoAdd(5,5)
+			Global.weaponManager.addAmmo(5,5)
 		queue_free()

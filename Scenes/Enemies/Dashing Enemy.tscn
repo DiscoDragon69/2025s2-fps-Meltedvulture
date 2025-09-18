@@ -1,19 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3suacnati8p5"]
+[gd_scene load_steps=6 format=3 uid="uid://c4edom56two64"]
 
-[ext_resource type="Script" path="res://Scripts/shooting Enemy.gd" id="1_etly5"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Dashing Enemy.gd" id="1_ivgrg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_37ydg"]
+radius = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_3o6bs"]
-size = Vector3(0.75, 0.25, 0.25)
-
-[sub_resource type="BoxMesh" id="BoxMesh_d74xd"]
-size = Vector3(0.25, 0.25, 0.5)
+size = Vector3(0.5, 0.25, 0.25)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bn7as"]
+radius = 0.4
 
-[node name="Shooting Enemy" type="CharacterBody3D"]
-script = ExtResource("1_etly5")
+[sub_resource type="SphereShape3D" id="SphereShape3D_bnpxs"]
+radius = 1.0
+
+[node name="DashingEnemy" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_ivgrg")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_37ydg")
@@ -22,23 +24,26 @@ mesh = SubResource("CapsuleMesh_37ydg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.4)
 mesh = SubResource("BoxMesh_3o6bs")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.5)
-mesh = SubResource("BoxMesh_d74xd")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_bn7as")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
+[node name="Attack Shape Cast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("SphereShape3D_bnpxs")
+target_position = Vector3(0, 0.5, 0)
+
 [node name="Attack Timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="BulletSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="Vision Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[node name="Dash Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="timeout" from="Vision Timer" to="." method="_on_vision_timer_timeout"]
+[connection signal="timeout" from="Dash Timer" to="." method="_on_dash_timer_timeout"]

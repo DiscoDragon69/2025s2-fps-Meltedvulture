@@ -11,6 +11,7 @@ extends CharacterBody3D
 @export var weaponController : WeaponController
 
 @onready var camera = $CameraController/Camera3D
+@onready var damageParticle = preload("res://Scenes/Enemy Hurt Effect.tscn")
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -26,7 +27,7 @@ var cameraOffset : Vector3
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = 12
-var stamina = 0
+var stamina = 100
 @onready var staminaBar = %"Stamina Bar"
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -117,6 +118,9 @@ func updateVelocity() -> void:
 func take_damage(damage):
 	Global.playerHealth -= damage
 	Global.updateHealth()
+	var instance = damageParticle.instantiate()
+	instance.global_position = global_position
+	get_tree().get_root().add_child(instance)
 
 
 

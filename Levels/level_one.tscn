@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="3_3evsp"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="3_jvavr"]
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="3_mhhm1"]
-[ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Basic Enemy.tscn" id="4_03fh0"]
+[ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Enemies/Basic Enemy.tscn" id="4_03fh0"]
 [ext_resource type="PackedScene" uid="uid://bahq27dp3ky0r" path="res://Scenes/Weapon Drop.tscn" id="4_be7ap"]
 [ext_resource type="PackedScene" uid="uid://cp6ha8p1oeydp" path="res://Scenes/Button and Door.tscn" id="4_ckt4g"]
 [ext_resource type="PackedScene" uid="uid://yx11e61r8bvg" path="res://Scenes/Enemy Spawner (Destroyable).tscn" id="8_ii3db"]
@@ -577,7 +577,7 @@ toggledOnOpen = [NodePath("../../../EnemySpawner(destroyable)")]
 [node name="EnemySpawner(destroyable)" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, -1.75, -41.75)
 spawnCooldown = 2.0
-enemyType = "res://Scenes/Basic Enemy.tscn"
+enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
 
 [node name="ButtonAndDoor3" parent="." instance=ExtResource("4_ckt4g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, -2.25, -41.75)
@@ -609,12 +609,12 @@ transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, 3.25, -
 [node name="EnemySpawner(destroyable)2" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -3.5, -1.75, -66.25)
 spawnCooldown = 1.5
-enemyType = "res://Scenes/Basic Enemy.tscn"
+enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
 
 [node name="EnemySpawner(destroyable)3" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -16.5, -1.75, -66)
 spawnCooldown = 1.5
-enemyType = "res://Scenes/Basic Enemy.tscn"
+enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
 
 [editable path="Nav Mesh/ButtonAndDoor"]
 [editable path="ButtonAndDoor"]

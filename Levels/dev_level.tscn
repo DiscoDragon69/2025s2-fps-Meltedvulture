@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cp6ha8p1oeydp" path="res://Scenes/Button and Door.tscn" id="7_xa0fl"]
 [ext_resource type="PackedScene" uid="uid://ddd2srvucv877" path="res://Levels/level_one.tscn" id="8_2pry7"]
 [ext_resource type="PackedScene" uid="uid://bahq27dp3ky0r" path="res://Scenes/Weapon Drop.tscn" id="8_bo3re"]
-[ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Basic Enemy.tscn" id="9_llcw1"]
+[ext_resource type="PackedScene" uid="uid://yx11e61r8bvg" path="res://Scenes/Enemy Spawner (Destroyable).tscn" id="9_6sgnd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru0gi"]
 
@@ -236,7 +236,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 1, 
 objectName = "Soul Knife"
 weaponPath = "res://Weapons/Soul Knife.tres"
 
-[node name="BasicEnemy" parent="." instance=ExtResource("9_llcw1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -12)
+[node name="EnemySpawner(destroyable)" parent="." instance=ExtResource("9_6sgnd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0)
+spawnRange = 5
+spawnCooldown = 1.0
+enabled = true
+enemyType = "res://Scenes/Enemies/Dashing Enemy.tscn"
 
 [editable path="ButtonAndDoor"]

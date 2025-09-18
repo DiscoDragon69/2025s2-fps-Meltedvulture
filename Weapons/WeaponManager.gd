@@ -197,7 +197,6 @@ func loadWeapon():
 		weaponGlobal.verticalRecoil = weaponType.verticalRecoil
 		weaponGlobal.horizontalRecoil = weaponType.horizontalRecoil
 		
-	print("Loaded WEapon")
 
 func sway_weapon(delta, isIdle: bool) -> void:
 	if weaponType == null:
@@ -418,7 +417,16 @@ func RayDamageParticle(result, hitPosition, hitNormal):
 
 func addAmmo(clipAdd, reserveAdd):
 	#Method of adding ammo
-	pass
+	var ammoNeeded = weaponGlobal.maxClipAmmo - weaponGlobal.clipAmmo
+	
+	if clipAdd > ammoNeeded:
+		weaponGlobal.clipAmmo = weaponGlobal.maxClipAmmo
+	else:
+		weaponGlobal.clipAmmo += clipAdd
+		
+	weaponGlobal.reserveAmmo -= reserveAdd
+	Global.clipLabel.text = str(weaponGlobal.clipAmmo)
+	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
 	
 #func _physics_process(delta) -> void:
 

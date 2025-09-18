@@ -12,7 +12,7 @@ material = SubResource("StandardMaterial3D_r4yat")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nebs0"]
 
-[node name="EnemySpawner(destroyable)" type="StaticBody3D"]
+[node name="EnemySpawner(destroyable)" type="StaticBody3D" groups=["Enemy"]]
 script = ExtResource("1_htqfc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
