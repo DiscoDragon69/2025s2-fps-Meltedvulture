@@ -424,7 +424,7 @@ func addAmmo(clipAdd, reserveAdd):
 	else:
 		weaponGlobal.clipAmmo += clipAdd
 		
-	weaponGlobal.reserveAmmo -= reserveAdd
+	weaponGlobal.reserveAmmo += reserveAdd
 	Global.clipLabel.text = str(weaponGlobal.clipAmmo)
 	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
 	
