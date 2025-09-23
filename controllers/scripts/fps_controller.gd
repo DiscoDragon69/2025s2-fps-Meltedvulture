@@ -80,8 +80,8 @@ func _physics_process(delta):
 	## Add the gravity.
 	#if not is_on_floor():
 		#velocity.y -= gravity * delta
-	var trueRotation = $CameraController/Camera3D.rotation - cameraOffset
-	$CameraController/Camera3D.rotation = lerp($CameraController/Camera3D.rotation, $CameraController/Camera3D.rotation + cameraOffset, 0.1)
+	var trueRotation = camera.rotation - cameraOffset
+	camera.rotation = lerp(camera.rotation, camera.rotation + cameraOffset, 0.1)
 	cameraOffset = lerp(cameraOffset, Vector3(0,0,0), 0.05)
 	
 	
