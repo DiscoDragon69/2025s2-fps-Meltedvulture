@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var attackTimer = $"Attack Timer"
 @onready var bulletSpawn = $BulletSpawn
 
-var pointDrop = preload("res://Scenes/Point Pickup.tscn")
+var pointDrop = preload("res://Scenes/Pickup.tscn")
 var bulletScene = preload("res://Scenes/Enemy Bullet.tscn")
 var speed = 6.0
 var health = 150

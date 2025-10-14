@@ -13,6 +13,7 @@ var new_veloicty
 
 func update_target_location (target_location):
 	nav_agent.set_target_position(target_location)
+	
 
 
 func _physics_process(delta):
@@ -25,7 +26,10 @@ func _physics_process(delta):
 	# Vector Maths
 	new_veloicty = (next_location-current_location).normalized() * speed
 	
+	velocity = new_veloicty
+	
 	move_and_slide()
+	
 
 	if attackCast.is_colliding():
 		for i in attackCast.get_collision_count():
