@@ -1,7 +1,8 @@
-[gd_scene load_steps=54 format=3 uid="uid://ddd2srvucv877"]
+[gd_scene load_steps=55 format=3 uid="uid://ddd2srvucv877"]
 
 [ext_resource type="PackedScene" uid="uid://b7iw6i56ry0x1" path="res://Scenes/Level Change Elevator.tscn" id="2_eqe8g"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="3_3evsp"]
+[ext_resource type="Material" uid="uid://drebapff76tov" path="res://Materials/Dev material 3.tres" id="3_4m5w4"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="3_jvavr"]
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="3_mhhm1"]
 [ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Enemies/Basic Enemy.tscn" id="4_03fh0"]
@@ -170,7 +171,7 @@ navigation_mesh = SubResource("NavigationMesh_qi0uk")
 
 [node name="Wall 1" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 4)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_l417k")
 skeleton = NodePath("../..")
 
@@ -181,7 +182,7 @@ shape = SubResource("ConvexPolygonShape3D_yp0ad")
 
 [node name="Wall 5" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(0.965926, 2.26266e-08, 0.258819, -1.13133e-08, 2, -1.48943e-09, -0.258819, -2.97886e-09, 0.965926, -5.5, 2.25, -11.75)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_wjxiq")
 skeleton = NodePath("../..")
 
@@ -247,7 +248,7 @@ shape = SubResource("ConvexPolygonShape3D_8he5n")
 
 [node name="Wall 6" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(0.965926, -2.26266e-08, -0.258819, 1.13133e-08, 2, -1.48943e-09, 0.258819, -2.97886e-09, 0.965926, 5.5, 2.25, -11.75)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_2cog3")
 skeleton = NodePath("../..")
 
@@ -258,7 +259,7 @@ shape = SubResource("ConvexPolygonShape3D_346tl")
 
 [node name="Wall 2" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 4)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_0jqd7")
 skeleton = NodePath("../..")
 
@@ -269,7 +270,7 @@ shape = SubResource("ConvexPolygonShape3D_2ph1x")
 
 [node name="Wall 3" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -3, 0, -4.5)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_17mir")
 skeleton = NodePath("../..")
 
@@ -280,7 +281,7 @@ shape = SubResource("ConvexPolygonShape3D_pm3eb")
 
 [node name="Wall 4" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, 1.31134e-07, 3, 0, -4.5)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_der7i")
 skeleton = NodePath("../..")
 
@@ -300,7 +301,7 @@ shape = SubResource("ConvexPolygonShape3D_g6ain")
 
 [node name="Roof 1" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 4)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_3ndvf")
 skeleton = NodePath("../..")
 
@@ -318,7 +319,7 @@ skeleton = NodePath("../..")
 
 [node name="Roof 3" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, -4.75)
-material_override = ExtResource("3_3evsp")
+material_override = ExtResource("3_4m5w4")
 mesh = SubResource("BoxMesh_33mvr")
 skeleton = NodePath("../..")
 

@@ -12,11 +12,19 @@ grow_vertical = 2
 script = ExtResource("1_c4ywx")
 
 [node name="StartGame" type="Button" parent="."]
-layout_mode = 0
-offset_left = 565.0
-offset_top = 279.0
-offset_right = 661.0
-offset_bottom = 310.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -26.5
+offset_right = 91.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
 text = "Start Game"
 
 [node name="DevelopmentLevel" type="Button" parent="."]
@@ -33,10 +41,16 @@ grow_vertical = 0
 text = "Development Level"
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 23.0
-text = "Welcome to DOOM CLONE"
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 51
+text = "Momement Shoodder Prototype"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="StartGame" to="." method="_on_start_button_pressed"]
