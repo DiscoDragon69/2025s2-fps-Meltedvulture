@@ -16,7 +16,3 @@ func _process(delta):
 
 func _on_start_button_pressed():
 	get_tree().change_scene_to_file("res://Levels/level_one.tscn")
-
-
-func _on_development_level_pressed() -> void:
-	get_tree().change_scene_to_file("res://Game/dev_level.tscn")

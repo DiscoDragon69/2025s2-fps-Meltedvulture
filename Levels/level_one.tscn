@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://b7iw6i56ry0x1" path="res://Scenes/Level Change Elevator.tscn" id="2_eqe8g"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="3_3evsp"]
-[ext_resource type="Material" uid="uid://drebapff76tov" path="res://Materials/Dev material 3.tres" id="3_4m5w4"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="3_jvavr"]
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="3_mhhm1"]
 [ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Enemies/Basic Enemy.tscn" id="4_03fh0"]
 [ext_resource type="PackedScene" uid="uid://bahq27dp3ky0r" path="res://Scenes/Weapon Drop.tscn" id="4_be7ap"]
 [ext_resource type="PackedScene" uid="uid://cp6ha8p1oeydp" path="res://Scenes/Button and Door.tscn" id="4_ckt4g"]
 [ext_resource type="PackedScene" uid="uid://yx11e61r8bvg" path="res://Scenes/Enemy Spawner (Destroyable).tscn" id="8_ii3db"]
+[ext_resource type="PackedScene" uid="uid://cget8ysifm8c2" path="res://Levels/Demo_Finished.tscn" id="9_nu5rw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rr384"]
 
@@ -153,7 +153,7 @@ data = PackedVector3Array(32, 0, 32, -32, 0, 32, 32, 0, -32, -32, 0, 32, -32, 0,
 [node name="LevelOne" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 16, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -171,7 +171,7 @@ navigation_mesh = SubResource("NavigationMesh_qi0uk")
 
 [node name="Wall 1" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 4)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_l417k")
 skeleton = NodePath("../..")
 
@@ -182,7 +182,7 @@ shape = SubResource("ConvexPolygonShape3D_yp0ad")
 
 [node name="Wall 5" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(0.965926, 2.26266e-08, 0.258819, -1.13133e-08, 2, -1.48943e-09, -0.258819, -2.97886e-09, 0.965926, -5.5, 2.25, -11.75)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_3evsp")
 mesh = SubResource("BoxMesh_wjxiq")
 skeleton = NodePath("../..")
 
@@ -193,7 +193,7 @@ shape = SubResource("ConvexPolygonShape3D_dty1y")
 
 [node name="Wall 7" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, -6.38378e-15, 0, 2.16493e-15, 2, -9.99201e-16, 0, -2.66454e-15, 1, -7.5, 2.25, -27)
-material_override = ExtResource("3_mhhm1")
+material_override = ExtResource("3_3evsp")
 mesh = SubResource("BoxMesh_xpq7v")
 skeleton = NodePath("../..")
 
@@ -204,7 +204,7 @@ shape = SubResource("ConvexPolygonShape3D_bg27f")
 
 [node name="Wall 8" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, -6.38378e-15, 0, 2.16493e-15, 2, -9.99201e-16, 0, -2.66454e-15, 1, 7.5, 2.25, -27)
-material_override = ExtResource("3_mhhm1")
+material_override = ExtResource("3_3evsp")
 mesh = SubResource("BoxMesh_5ew81")
 skeleton = NodePath("../..")
 
@@ -214,7 +214,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_2m604")
 
 [node name="Wall 13" type="MeshInstance3D" parent="Nav Mesh"]
-transform = Transform3D(1, -6.38378e-15, 0, 2.16493e-15, 2, -9.99201e-16, 0, -2.66454e-15, 1, 7.5, 2.25, -41.25)
+transform = Transform3D(0.8, -6.38378e-15, 0, 1.73194e-15, 2, -9.99201e-16, 0, -2.66454e-15, 1, 7.5, 2.25, -41.25)
 material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_rvcsi")
 skeleton = NodePath("../..")
@@ -225,7 +225,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_2m604")
 
 [node name="Wall 11" type="MeshInstance3D" parent="Nav Mesh"]
-transform = Transform3D(-4.37114e-08, 8.74228e-08, 1, -4.37114e-08, 2, -4.37114e-08, -1, -8.74228e-08, -4.37114e-08, -15, 2.25, -34.5)
+transform = Transform3D(-4.37114e-08, 8.74228e-08, 1.2, -4.37114e-08, 2, -5.24537e-08, -1, -8.74228e-08, -5.24537e-08, -17.6, 2.25, -34.5)
 material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_oej4j")
 skeleton = NodePath("../..")
@@ -248,7 +248,7 @@ shape = SubResource("ConvexPolygonShape3D_8he5n")
 
 [node name="Wall 6" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(0.965926, -2.26266e-08, -0.258819, 1.13133e-08, 2, -1.48943e-09, 0.258819, -2.97886e-09, 0.965926, 5.5, 2.25, -11.75)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_3evsp")
 mesh = SubResource("BoxMesh_2cog3")
 skeleton = NodePath("../..")
 
@@ -259,7 +259,7 @@ shape = SubResource("ConvexPolygonShape3D_346tl")
 
 [node name="Wall 2" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 4)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_0jqd7")
 skeleton = NodePath("../..")
 
@@ -270,7 +270,7 @@ shape = SubResource("ConvexPolygonShape3D_2ph1x")
 
 [node name="Wall 3" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -3, 0, -4.5)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_17mir")
 skeleton = NodePath("../..")
 
@@ -281,7 +281,7 @@ shape = SubResource("ConvexPolygonShape3D_pm3eb")
 
 [node name="Wall 4" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, 1.31134e-07, 3, 0, -4.5)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_der7i")
 skeleton = NodePath("../..")
 
@@ -301,7 +301,7 @@ shape = SubResource("ConvexPolygonShape3D_g6ain")
 
 [node name="Roof 1" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 4)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_3ndvf")
 skeleton = NodePath("../..")
 
@@ -319,7 +319,7 @@ skeleton = NodePath("../..")
 
 [node name="Roof 3" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, -4.75)
-material_override = ExtResource("3_4m5w4")
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_33mvr")
 skeleton = NodePath("../..")
 
@@ -381,17 +381,6 @@ skeleton = NodePath("../..")
 [node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Wall 16"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nav Mesh/Wall 16/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_xhofx")
-
-[node name="Wall 18" type="MeshInstance3D" parent="Nav Mesh"]
-transform = Transform3D(1.31134e-07, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, 1.31134e-07, -23.475, 2.38419e-07, -33.775)
-material_override = ExtResource("3_3evsp")
-mesh = SubResource("BoxMesh_tvcg4")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Nav Mesh/Wall 18"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Nav Mesh/Wall 18/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_xhofx")
 
 [node name="Wall 17" type="MeshInstance3D" parent="Nav Mesh"]
@@ -465,6 +454,7 @@ shape = SubResource("ConvexPolygonShape3D_d31b6")
 
 [node name="Roof 4" type="MeshInstance3D" parent="Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 12.25)
+material_override = ExtResource("3_mhhm1")
 mesh = SubResource("BoxMesh_sytq8")
 skeleton = NodePath("../..")
 
@@ -522,38 +512,6 @@ transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, 1, -1, 4
 objectName = "Blaster"
 weaponPath = "res://Weapons/Blaster.tres"
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 7.15)
-shadow_enabled = true
-spot_range = 6.0
-spot_angle = 30.0
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, -3)
-shadow_enabled = true
-spot_range = 6.0
-spot_angle = 30.0
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, -24.75)
-light_energy = 16.0
-distance_fade_enabled = true
-distance_fade_begin = 25.0
-distance_fade_shadow = 25.0
-spot_range = 9.5
-spot_attenuation = 1.5
-spot_angle = 50.5486
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 4.5, -41.75)
-light_energy = 16.0
-distance_fade_enabled = true
-distance_fade_begin = 25.0
-distance_fade_shadow = 25.0
-spot_range = 9.5
-spot_attenuation = 1.5
-spot_angle = 50.5486
-
 [node name="ButtonAndDoor" parent="." instance=ExtResource("4_ckt4g")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -2.25, -4.75)
 
@@ -569,6 +527,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.18557e-08)
 [node name="ButtonAndDoor2" parent="." instance=ExtResource("4_ckt4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, -2.25, -35)
 
+[node name="Door Origin" parent="ButtonAndDoor2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, 0.5, 0, -2.18556e-08)
+
 [node name="Button Origin" parent="ButtonAndDoor2" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, 0.75, 0, -3.27835e-08)
 
@@ -577,17 +538,18 @@ toggledOnOpen = [NodePath("../../../EnemySpawner(destroyable)")]
 
 [node name="EnemySpawner(destroyable)" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, -1.75, -41.75)
-spawnCooldown = 2.0
+spawnCooldown = 6.0
 enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
 
 [node name="ButtonAndDoor3" parent="." instance=ExtResource("4_ckt4g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, -2.25, -41.75)
 
 [node name="Button Origin" parent="ButtonAndDoor3" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.75, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 0)
 
 [node name="FPS Elevator" parent="ButtonAndDoor3" instance=ExtResource("2_eqe8g")]
 transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 3.82137e-15, 1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, 12.75, 1.5, -34)
+levelToChange = ExtResource("9_nu5rw")
 
 [node name="ButtonAndDoor4" parent="." instance=ExtResource("4_ckt4g")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, -9.75, -2.25, -70.75)
@@ -609,13 +571,47 @@ transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, 3.25, -
 
 [node name="EnemySpawner(destroyable)2" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -3.5, -1.75, -66.25)
-spawnCooldown = 1.5
 enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
 
 [node name="EnemySpawner(destroyable)3" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -16.5, -1.75, -66)
-spawnCooldown = 1.5
+spawnCooldown = 4.0
 enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
+
+[node name="omniLight3d" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -27)
+light_energy = 16.0
+omni_range = 12.0
+
+[node name="omniLight3d3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -42)
+light_energy = 16.0
+omni_range = 12.0
+
+[node name="omniLight3d4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 5, -42)
+light_energy = 16.0
+omni_range = 12.0
+
+[node name="omniLight3d2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -14)
+light_energy = 16.0
+omni_range = 12.0
+omni_shadow_mode = 0
+
+[node name="spotLight3d" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 0, 2, -3.2)
+light_energy = 6.0
+spot_range = 6.0
+spot_attenuation = 0.75
+spot_angle = 24.02
+
+[node name="spotLight3d2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 0, 2, 7.4)
+light_energy = 6.0
+spot_range = 6.0
+spot_attenuation = 0.75
+spot_angle = 24.02
 
 [editable path="Nav Mesh/ButtonAndDoor"]
 [editable path="ButtonAndDoor"]

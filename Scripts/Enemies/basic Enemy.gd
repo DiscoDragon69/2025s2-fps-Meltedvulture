@@ -66,6 +66,6 @@ func _on_vision_timer_timeout() -> void:
 	var query = PhysicsRayQueryParameters3D.create(origin, endpoint)
 	var result = spaceState.intersect_ray(query)
 	var hitBody = result.get("collider")
-	if hitBody.owner == Global.player:
+	if hitBody.get_parent() == Global.player:
 		update_target_location(Global.player.global_transform.origin)
 		look_at(Global.player.global_position + Vector3(0, 1, 0)) # Enemy will turn to face player

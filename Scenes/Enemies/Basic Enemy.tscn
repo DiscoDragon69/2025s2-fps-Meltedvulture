@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://lwlnbltk2juo"]
+[gd_scene load_steps=7 format=3 uid="uid://lwlnbltk2juo"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/basic Enemy.gd" id="1_m2tjl"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4f8pk"]
+albedo_color = Color(0.539086, 0, 0.0297756, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_37ydg"]
+material = SubResource("StandardMaterial3D_4f8pk")
 radius = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_3o6bs"]

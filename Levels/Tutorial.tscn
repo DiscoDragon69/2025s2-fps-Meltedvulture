@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnhenn2gqx84w"]
+
+[ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_cy4aj"]
+[ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="4_5qlde"]
+[ext_resource type="PackedScene" uid="uid://b7iw6i56ry0x1" path="res://Scenes/Level Change Elevator.tscn" id="6_8p4b5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru0gi"]
+
+[sub_resource type="Sky" id="Sky_k0i8n"]
+sky_material = SubResource("ProceduralSkyMaterial_ru0gi")
+
+[sub_resource type="Environment" id="Environment_vi8wd"]
+background_mode = 2
+sky = SubResource("Sky_k0i8n")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ant0e"]
+vertices = PackedVector3Array(-31.5, 0.5, -31.5, -31.5, 0.5, 31.5, 31.5, 0.5, 31.5, 31.5, 0.5, -31.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_height = 2.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fmrwd"]
+material = ExtResource("1_cy4aj")
+size = Vector2(64, 64)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ht7eo"]
+data = PackedVector3Array(32, 0, 32, -32, 0, 32, 32, 0, -32, -32, 0, 32, -32, 0, -32, 32, 0, -32)
+
+[node name="dev_level" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.582934, -0.0119615, 0.812432, -0.400235, 0.865943, 0.299925, -0.707107, -0.5, 0.5, 0, 5, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vi8wd")
+
+[node name="Level Nav Mesh" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_ant0e")
+
+[node name="Floor" type="MeshInstance3D" parent="Level Nav Mesh"]
+mesh = SubResource("PlaneMesh_fmrwd")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level Nav Mesh/Floor"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Nav Mesh/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ht7eo")
+
+[node name="Player" parent="." instance=ExtResource("4_5qlde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+
+[node name="FPS Elevator" parent="." instance=ExtResource("6_8p4b5")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.4, 16)
+spawnpoint = true
