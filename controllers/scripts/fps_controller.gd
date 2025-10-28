@@ -67,6 +67,8 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#Prevents player from activating crouch cast
 	CROUCH_SHAPECAST.add_exception($".")
+	Global.playerHealth = Global.playerHealth
+	Global.playerPoints = Global.playerPoints
 
 func _physics_process(delta):
 	# Update camera movement based on mouse movement
@@ -99,7 +101,7 @@ func updateInput(speed: float, acceleration: float, deceleration: float) -> void
 	
 		
 	if velocity.length() > 7:
-		camera.fov = clamp(lerp(camera.fov, 90 + (2 * velocity.length()), 0.1), 90, 170)
+		camera.fov = clamp(lerp(camera.fov, 90 + (1.5 * velocity.length()), 0.1), 90, 130)
 	else:
 		camera.fov = lerp(camera.fov, 90.0, 0.1)
 	

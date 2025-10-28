@@ -17,9 +17,15 @@ var weaponBulletScene
 var currentWeaponPath
 
 
-var reserveAmmo
+var reserveAmmo:
+	set(value):
+		reserveAmmo = value
+		Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
 var maxClipAmmo
-var clipAmmo
+var clipAmmo:
+	set(value):
+		clipAmmo = value
+		Global.clipLabel.text = str(weaponGlobal.clipAmmo)
 
 
 var canShoot : bool = true

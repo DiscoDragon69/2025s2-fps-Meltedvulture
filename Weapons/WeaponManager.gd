@@ -60,7 +60,8 @@ func _ready() -> void:
 		weaponGlobal.hasSpawned = true
 	
 	loadWeapon()
-	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo)
+	Global.clipLabel.text = str(weaponGlobal.clipAmmo)
+	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
 	
 func _input(event):
 	if event.is_action_pressed("weaponDown"):

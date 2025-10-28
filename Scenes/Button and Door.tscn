@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp6ha8p1oeydp"]
+[gd_scene load_steps=12 format=3 uid="uid://cp6ha8p1oeydp"]
 
 [ext_resource type="Script" path="res://Scripts/button For Door.gd" id="1_6o7pi"]
+[ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="3_is5jb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_yx45v"]
 size = Vector3(0.25, 2.5, 2)
@@ -13,7 +14,11 @@ top_radius = 0.15
 bottom_radius = 0.2
 height = 0.75
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev1k4"]
+albedo_color = Color(0.657003, 0.0820548, 4.81308e-08, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_7srrd"]
+material = SubResource("StandardMaterial3D_ev1k4")
 top_radius = 0.125
 bottom_radius = 0.125
 height = 0.1
@@ -105,6 +110,7 @@ script = ExtResource("1_6o7pi")
 
 [node name="Base" type="MeshInstance3D" parent="Button Origin/Button"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+material_override = ExtResource("3_is5jb")
 mesh = SubResource("CylinderMesh_iys4u")
 skeleton = NodePath("../../..")
 
