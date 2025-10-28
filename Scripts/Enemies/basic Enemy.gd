@@ -4,8 +4,9 @@ extends CharacterBody3D
 @onready var attackCast = $"Attack Shape Cast"
 @onready var attackTimer = $"Attack Timer"
 
+
 var Drop = preload("res://Scenes/Pickup.tscn")
-var speed = 6.0
+@export var speed = 6.0
 var health = 100
 var rng = RandomNumberGenerator.new()
 
