@@ -7,7 +7,7 @@ extends CharacterBody3D
 
 var Drop = preload("res://Scenes/Pickup.tscn")
 @export var speed = 6.0
-var health = 100
+@export var health = 100
 var rng = RandomNumberGenerator.new()
 
 var new_veloicty
