@@ -61,7 +61,7 @@ func changeVel(vel):
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	var hitVelocity = linear_velocity.length()
-	if hitVelocity > 4 and body.is_in_group("Enemy"):
+	if hitVelocity > 1 and body.is_in_group("Enemy"):
 		linear_velocity = (Vector3(0, 8, 0))
 		if weaponReturning == true:
 			returning = true

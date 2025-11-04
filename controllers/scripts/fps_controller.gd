@@ -12,6 +12,7 @@ extends CharacterBody3D
 
 @onready var camera = $CameraController/Camera3D
 @onready var damageParticle = preload("res://Scenes/Enemy Hurt Effect.tscn")
+@onready var animationPlayer = $"Level Fade"
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -124,6 +125,10 @@ func take_damage(damage):
 	instance.global_position = global_position
 	get_tree().get_root().add_child(instance)
 
-
+func showLevelText(spawnText):
+	%"Spawn Label".text = spawnText
+	animationPlayer.play("Level Fade", -1, 1, false)
+	await animationPlayer.animation_finished
+	animationPlayer.play("Level Fade", -1, -1, true)
 
 #WORK ON THIS PELASE AHHHHHHHHHHHHHHHHHH

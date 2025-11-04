@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=45 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
@@ -864,7 +864,47 @@ _data = {
 "crouch": SubResource("Animation_ca8e7")
 }
 
+[sub_resource type="Animation" id="Animation_6a3ph"]
+resource_name = "Level Fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UserInterface/Spawn Text/Spawn Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_teluw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UserInterface/Spawn Text/Spawn Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i6wcq"]
+_data = {
+"Level Fade": SubResource("Animation_6a3ph"),
+"RESET": SubResource("Animation_teluw")
+}
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_ca8e7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_syckn"]
+font_size = 64
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wsqmy"]
 
@@ -934,6 +974,11 @@ libraries = {
 "": SubResource("AnimationLibrary_t6fw5")
 }
 blend_times = [&"Sliding", &"RESET", 0.5, &"Sliding", &"Sliding", 0.5, &"Sliding", &"Sprinting", 0.5, &"Sliding", &"Walking", 0.5, &"Sliding", &"crouch", 0.5, &"crouch", &"Sliding", 0.25]
+
+[node name="Level Fade" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i6wcq")
+}
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -1112,6 +1157,25 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+
+[node name="Spawn Text" type="HBoxContainer" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -283.0
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spawn Label" type="Label" parent="UserInterface/Spawn Text"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "TestTest"
+label_settings = SubResource("LabelSettings_syckn")
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("currentState")]
 script = ExtResource("6_co0pi")

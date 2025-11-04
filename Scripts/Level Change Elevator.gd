@@ -6,6 +6,7 @@ extends Node3D
 
 @export var spawnpoint: bool = false
 @export var levelToChange: PackedScene
+@export var spawnText : String = "null"
 var exited = false
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +15,8 @@ func _ready() -> void:
 		timer.start(1)
 		await timer.timeout
 		animationPlayer.play("Entrance Level Open")
+		if spawnText != "null":
+			Global.player.showLevelText(spawnText)
 
 
 func changeLevel():

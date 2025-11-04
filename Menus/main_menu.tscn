@@ -37,7 +37,7 @@ offset_right = 576.0
 offset_bottom = 70.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 51
-text = "Momement Shoodder Prototype"
+text = "Movement Shooter Prototype"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="StartGame" to="." method="_on_start_button_pressed"]
