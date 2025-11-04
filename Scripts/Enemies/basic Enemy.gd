@@ -8,6 +8,9 @@ extends CharacterBody3D
 var Drop = preload("res://Scenes/Pickup.tscn")
 @export var speed = 6.0
 @export var health = 100
+
+@export var bulletImmunity = false
+@export var throwImmunity = false
 var rng = RandomNumberGenerator.new()
 
 var new_veloicty
@@ -48,8 +51,12 @@ func attackCooldown():
 	await attackTimer.timeout
 	attackCast.enabled = true
 
-func take_damage(damage):
-	health -= damage
+func take_damage(damage, damageType):
+	if damageType == "bullet" and bulletImmunity == false:
+		health -= damage
+	elif damageType == "throw" and throwImmunity == false:
+		health -= damage
+	
 	if health <=0:
 		for i in rng.randi_range(1, 6):
 			var droppedPoint = Drop.instantiate()

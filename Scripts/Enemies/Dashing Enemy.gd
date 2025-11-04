@@ -5,8 +5,11 @@ extends CharacterBody3D
 @onready var attackTimer = $"Attack Timer"
 
 var Drop = preload("res://Scenes/Pickup.tscn")
-var speed = 28.0
-var health = 100
+@export var speed = 28.0
+@export var health = 100
+
+@export var bulletImmunity = false
+@export var throwImmunity = false
 var rng = RandomNumberGenerator.new()
 
 var new_velocity
@@ -39,8 +42,11 @@ func attackCooldown():
 	await attackTimer.timeout
 	attackCast.enabled = true
 
-func take_damage(damage):
-	health -= damage
+func take_damage(damage, damageType):
+	if damageType == "bullet" and bulletImmunity == false:
+		health -= damage
+	elif damageType == "throw" and throwImmunity == false:
+		health -= damage
 	if health <=0:
 		for i in rng.randi_range(1, 6):
 			var droppedPoint = Drop.instantiate()

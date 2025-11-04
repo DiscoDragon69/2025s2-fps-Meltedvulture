@@ -285,7 +285,7 @@ func shoot() -> void:
 					var hitBody = result.get("collider")  # Get the object that was hit
 					if hitBody and hitBody.has_method("take_damage"):
 						RayDamageParticle(result, hitPosition, hitNormal)
-						hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
+						hitBody.take_damage(weaponType.Damage, "bullet")  # Deal damage to the enemy
 					
 			else:
 				var accuracyAdjustment = Vector3 (
@@ -305,7 +305,7 @@ func shoot() -> void:
 				var hitBody = result.get("collider")  # Get the object that was hit
 				if hitBody and hitBody.has_method("take_damage"):
 					RayDamageParticle(result, hitPosition, hitNormal)
-					hitBody.take_damage(weaponType.Damage)  # Deal damage to the enemy
+					hitBody.take_damage(weaponType.Damage, "bullet")  # Deal damage to the enemy
 					
 
 		if weaponGlobal.weaponBulletPhysics == "Projectile":

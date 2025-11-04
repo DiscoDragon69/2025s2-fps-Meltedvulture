@@ -69,7 +69,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		instance.get_child(0).setCount(4 + roundi(hitVelocity / 2))
 		instance.global_position = position
 		get_tree().get_root().add_child(instance)
-		body.take_damage(roundi(hitVelocity * (2 + weaponWeight)))
+		body.take_damage(roundi(hitVelocity * (2 + weaponWeight)), "throw")
 
 
 func _physics_process(delta: float) -> void:

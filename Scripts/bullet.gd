@@ -21,7 +21,7 @@ func _on_body_entered(body: Node3D) -> void:
 		var instance = damageParticle.instantiate()
 		instance.global_position = position
 		get_tree().root.add_child(instance)
-		body.take_damage(damage)
+		body.take_damage(damage, "bullet")
 	destroy()
 
 func destroy():

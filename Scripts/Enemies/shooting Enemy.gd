@@ -6,8 +6,12 @@ extends CharacterBody3D
 
 var pointDrop = preload("res://Scenes/Pickup.tscn")
 var bulletScene = preload("res://Scenes/Enemy Bullet.tscn")
-var speed = 6.0
-var health = 150
+@export var speed = 6.0
+@export var health = 150
+
+@export var bulletImmunity = false
+@export var throwImmunity = false
+
 var shootInterval = 1
 var rng = RandomNumberGenerator.new()
 var canShoot = true
@@ -45,7 +49,7 @@ func attackCooldown():
 	await attackTimer.timeout
 	canShoot = true
 
-func take_damage(damage):
+func take_damage(damage, damageType):
 	health -= damage
 	if health <=0:
 		for i in rng.randi_range(1, 6):
