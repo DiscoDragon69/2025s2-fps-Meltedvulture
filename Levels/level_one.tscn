@@ -537,14 +537,16 @@ enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
 [node name="EnemySpawner(destroyable)2" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -3.5, -1.75, -66.25)
 health = 150
-spawnCooldown = 4.0
-enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
+spawnRange = 3
+spawnCooldown = 5.0
+enemyType = "res://Scenes/Enemies/Dashing Enemy.tscn"
 
 [node name="EnemySpawner(destroyable)3" parent="." instance=ExtResource("8_ii3db")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.64203e-15, 0, -1.64203e-15, 1, -16.5, -1.75, -66)
 health = 150
-spawnCooldown = 4.0
-enemyType = "res://Scenes/Enemies/Basic Enemy.tscn"
+spawnRange = 3
+spawnCooldown = 5.0
+enemyType = "res://Scenes/Enemies/Dashing Enemy.tscn"
 
 [node name="omniLight3d" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -27)

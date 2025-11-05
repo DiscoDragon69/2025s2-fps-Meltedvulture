@@ -33,7 +33,7 @@ func _physics_process(delta):
 			else:
 				if attackCast.get_collider(i).is_in_group("Enemy") == false:
 					if attackCast.get_collider(i).has_method("take_damage"):
-						attackCast.get_collider(i).take_damage(10)
+						attackCast.get_collider(i).take_damage(10, "bullet")
 						attackCast.enabled = false
 						attackCooldown()
 

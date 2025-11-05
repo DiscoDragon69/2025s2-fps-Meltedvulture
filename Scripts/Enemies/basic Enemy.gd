@@ -11,12 +11,14 @@ var Drop = preload("res://Scenes/Pickup.tscn")
 
 @export var bulletImmunity = false
 @export var throwImmunity = false
+@export var disableAI = false
 var rng = RandomNumberGenerator.new()
 
 var new_veloicty
 
 func update_target_location (target_location):
-	nav_agent.set_target_position(target_location)
+	if disableAI == false:
+		nav_agent.set_target_position(target_location)
 	
 
 
@@ -42,7 +44,7 @@ func _physics_process(delta):
 			else:
 				if attackCast.get_collider(i).is_in_group("Enemy") == false:
 					if attackCast.get_collider(i).has_method("take_damage"):
-						attackCast.get_collider(i).take_damage(10)
+						attackCast.get_collider(i).take_damage(10, "bullet")
 						attackCast.enabled = false
 						attackCooldown()
 

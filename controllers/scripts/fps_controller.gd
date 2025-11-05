@@ -117,7 +117,7 @@ func updateVelocity() -> void:
 		Global.debug.addProperty("Player Y Velocity", velocity.y, 1)
 		Global.debug.addProperty("FOV", camera.fov, 5)
 		
-func take_damage(damage):
+func take_damage(damage, type):
 	Global.playerHealth -= damage
 	Global.updateHealth()
 	var instance = damageParticle.instantiate()

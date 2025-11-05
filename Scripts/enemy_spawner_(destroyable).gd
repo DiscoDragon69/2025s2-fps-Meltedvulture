@@ -22,7 +22,7 @@ func _ready() -> void:
 		loadedEnemy = load(enemyType)
 
 
-func take_damage(damage):
+func take_damage(damage, type):
 	health -= damage
 	if health <=0:
 		queue_free()

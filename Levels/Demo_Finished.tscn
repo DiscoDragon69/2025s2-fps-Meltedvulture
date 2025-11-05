@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cget8ysifm8c2"]
+[gd_scene load_steps=14 format=3 uid="uid://cget8ysifm8c2"]
 
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_hivoe"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://controllers/fps_controller.tscn" id="4_hp7ua"]
+[ext_resource type="PackedScene" uid="uid://lwlnbltk2juo" path="res://Scenes/Enemies/Basic Enemy.tscn" id="5_fklrh"]
 [ext_resource type="PackedScene" uid="uid://b7iw6i56ry0x1" path="res://Scenes/Level Change Elevator.tscn" id="6_y0wcm"]
 [ext_resource type="PackedScene" uid="uid://bahq27dp3ky0r" path="res://Scenes/Weapon Drop.tscn" id="8_2ne1i"]
 
@@ -115,3 +116,23 @@ weaponPath = "res://Weapons/Revolver.tres"
 transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, -1.9, 0.8, 2.1)
 objectName = "Blaster"
 weaponPath = "res://Weapons/Blaster.tres"
+
+[node name="BasicEnemy" parent="." instance=ExtResource("5_fklrh")]
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 3.82137e-15, 1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -8.6, 1.05, 2.4)
+disableAI = true
+
+[node name="BasicEnemy2" parent="." instance=ExtResource("5_fklrh")]
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 3.82137e-15, 1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -6.6, 1.05, 2.4)
+disableAI = true
+
+[node name="BasicEnemy3" parent="." instance=ExtResource("5_fklrh")]
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 3.82137e-15, 1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -10.6, 1.05, 2.4)
+disableAI = true
+
+[node name="BasicEnemy4" parent="." instance=ExtResource("5_fklrh")]
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 3.82137e-15, 1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -12.6, 1.05, 2.4)
+disableAI = true
+
+[node name="BasicEnemy5" parent="." instance=ExtResource("5_fklrh")]
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 3.82137e-15, 1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -14.6, 1.05, 2.4)
+disableAI = true
