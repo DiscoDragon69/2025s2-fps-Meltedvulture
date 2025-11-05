@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://77ix2dc7fmfd"]
+[gd_scene load_steps=32 format=3 uid="uid://77ix2dc7fmfd"]
 
 [ext_resource type="Material" uid="uid://cipnbx8j3em41" path="res://Materials/Dev material.tres" id="1_7ir5h"]
 [ext_resource type="Material" uid="uid://c8f5oc8m0t56x" path="res://Materials/Dev material 2.tres" id="2_iiybt"]
@@ -32,6 +32,9 @@ size = Vector2(64, 64)
 data = PackedVector3Array(32, 0, 32, -32, 0, 32, 32, 0, -32, -32, 0, 32, -32, 0, -32, 32, 0, -32)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pmaux"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_t3fxb"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r4p8t"]
 size = Vector3(4, 1, 1)
@@ -109,6 +112,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.45645, 4)
 material_override = ExtResource("1_7ir5h")
 mesh = SubResource("BoxMesh_pmaux")
 skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level Nav Mesh/Size ref"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Nav Mesh/Size ref/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_t3fxb")
 
 [node name="Wall" type="MeshInstance3D" parent="Level Nav Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -10)
@@ -228,7 +236,7 @@ objectName = "Blaster"
 weaponPath = "res://Weapons/Blaster.tres"
 
 [node name="WeaponDrop2" parent="." instance=ExtResource("8_bo3re")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 1, 10)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.1, 1, 4.3)
 objectName = "Revolver"
 weaponPath = "res://Weapons/Revolver.tres"
 

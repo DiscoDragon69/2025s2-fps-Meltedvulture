@@ -38,6 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
 		
+		
 func _input(event):
 	
 	if event.is_action_pressed("exit"):
@@ -45,7 +46,6 @@ func _input(event):
 
 func _update_camera(delta):
 	# Rotates camera using euler rotation
-	currentRotation = _rotation_input
 	_mouse_rotation.x += _tilt_input * delta
 	_mouse_rotation.x = clamp(_mouse_rotation.x, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT)
 	_mouse_rotation.y += _rotation_input * delta
@@ -83,7 +83,6 @@ func _physics_process(delta):
 	## Add the gravity.
 	#if not is_on_floor():
 		#velocity.y -= gravity * delta
-	var trueRotation = camera.rotation - cameraOffset
 	camera.rotation = lerp(camera.rotation, camera.rotation + cameraOffset, 0.1)
 	cameraOffset = lerp(cameraOffset, Vector3(0,0,0), 0.05)
 	
