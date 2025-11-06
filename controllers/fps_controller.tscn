@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://c3ffql15mo0aj"]
+[gd_scene load_steps=46 format=3 uid="uid://c3ffql15mo0aj"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://controllers/materials/player.tres" id="2_gldw4"]
@@ -903,6 +903,9 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ca8e7"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_r1u4k"]
+font_size = 48
+
 [sub_resource type="LabelSettings" id="LabelSettings_syckn"]
 font_size = 64
 
@@ -1114,21 +1117,21 @@ grow_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 text = "100"
-label_settings = ExtResource("8_fyafc")
+label_settings = SubResource("LabelSettings_r1u4k")
 
 [node name="InteractionHbox" type="HBoxContainer" parent="UserInterface"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -227.0
-offset_top = -167.0
+offset_top = 120.0
 offset_right = 227.0
-offset_bottom = -127.0
+offset_bottom = 187.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="InteractionLabel" type="Label" parent="UserInterface/InteractionHbox"]
 unique_name_in_owner = true
@@ -1146,11 +1149,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -175.0
-offset_top = -108.0
+offset_top = -62.0
 offset_right = 175.0
-offset_bottom = -68.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1.25, 1.25)
+pivot_offset = Vector2(175, 20)
 
 [node name="Stamina Bar" type="ProgressBar" parent="UserInterface/Stamina"]
 unique_name_in_owner = true

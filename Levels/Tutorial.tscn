@@ -536,16 +536,18 @@ outline_size = 32
 
 [node name="Jump Label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9, 1.6, -2.1)
+billboard = 2
 text = "Space to Jump"
 font_size = 100
 outline_size = 32
 
 [node name="Dashing Label" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.75, 5, -24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.75, 6.25, -35.55)
 text = "Jump and press Shift
 To perform a dash in the direction
-You are looking"
-font_size = 75
+You are looking
+Dash into the air to here"
+font_size = 85
 outline_size = 32
 
 [node name="Shoot Label" type="Label3D" parent="."]
@@ -556,10 +558,23 @@ font_size = 75
 outline_size = 32
 
 [node name="Throw Label" type="Label3D" parent="."]
-transform = Transform3D(1, -7.10543e-15, -1.42109e-14, 1.42109e-14, 1, -8.74745e-15, 1.06581e-14, 1.25688e-14, 1, 15.7, 1.95, -16.55)
+transform = Transform3D(1, -7.10543e-15, -1.42109e-14, 1.42109e-14, 1, -8.74745e-15, 1.06581e-14, 1.25688e-14, 1, 15.35, 1.95, -16.55)
+billboard = 2
 text = "Use Right Click to throw your weapon 
 to deal damage.
 Speed = increased damage"
+font_size = 75
+outline_size = 32
+
+[node name="Throw Label3" type="Label3D" parent="."]
+transform = Transform3D(1, -7.10543e-15, -1.42109e-14, 1.42109e-14, 1, -8.74745e-15, 1.06581e-14, 1.25688e-14, 1, 20.25, 2.15, -16.85)
+text = "Does not take bullet damage*"
+font_size = 48
+outline_size = 32
+
+[node name="Throw Label2" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 15.35, 1.95, -10.1)
+text = "<<<<<<<<<"
 font_size = 75
 outline_size = 32
 
